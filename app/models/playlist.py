@@ -4,7 +4,7 @@ class Playlist(db.Model):
   __tablename__ = "playlists"
   id = db.Column(db.Integer, primary_key=True)
   title = db.Column(db.String, nullable=False)
-  owner_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+  owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
   cover_img = db.Column(db.String, nullable=False)
 
   user = db.relationship("User", back_populates="playlists")
