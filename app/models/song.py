@@ -5,9 +5,11 @@ class Song(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), nullable=False)
-    album_id = db.relationship("Album", back_populates="album_id")
+    album_id = db.Column(db.Integer, db.ForeignKey("albums.id"), nullable=False)
     track_num = db.Column(db.Integer, nullable=False)
     song_link = db.Column(db.String, nullable=False)
+
+    album = db.relationship("Album", back_populates="songs")
 
     def to_dict(self, printer=False):
         return_dict = {

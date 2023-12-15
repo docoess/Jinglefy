@@ -11,6 +11,7 @@ class Album(db.Model):
     release_date = db.Column(db.Date, nullable=False)
 
     artist = db.relationship("User", back_populates="albums")
+    songs = db.relationship("Song", back_populates="album")
 
     def to_dict(self, printer=False):
         return_dict = {
