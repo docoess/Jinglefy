@@ -1,0 +1,29 @@
+from .db import db
+
+class Album(db.Model):
+    __tablename__ = 'albums'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50), nullable=False)
+    cover_image = db.Column(db.String(255), nullable=False)
+    desc = db.Column(db.String(2000), nullable=False)
+    artist_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    num_songs = db.Column(db.Integer, nullable=False)
+    release_date = db.Column(db.Date, nullable=False)
+
+    artist = db.relationship("User", back_populates="albums")
+
+    def to_dict(self, printer):
+        return_dict = {
+            "id": self.id,
+            "title": self.title,
+            "cover_image": self.cover_image,
+            "desc": self.desc,
+            "artist_id": self.artist_id,
+            "num_songs": self.num_songs,
+            "release_date": self.release_date
+        }
+
+        if printer:
+            print(return_dict)
+
+        return return_dict
