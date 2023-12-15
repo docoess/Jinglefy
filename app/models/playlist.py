@@ -8,7 +8,7 @@ class Playlist(db.Model):
   cover_img = db.Column(db.String, nullable=False)
 
   user = db.relationship("User", back_populates="playlists")
-  playlist_songs = db.relationship("Songs", secondary="playlist_songs", back_populates="songs")
+  playlist_songs = db.relationship("Song", secondary="playlist_songs")
 
 
 
