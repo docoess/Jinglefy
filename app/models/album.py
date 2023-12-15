@@ -12,7 +12,7 @@ class Album(db.Model):
 
     artist = db.relationship("User", back_populates="albums")
 
-    def to_dict(self, printer):
+    def to_dict(self, printer=False):
         return_dict = {
             "id": self.id,
             "title": self.title,
