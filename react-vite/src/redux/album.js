@@ -54,10 +54,14 @@ export const postAlbumThunk = (formData) => async dispatch => {
 
     if (res.ok) {
         const album = await res.json();
-        dispatch(getOneAlbum(album))
+        dispatch(postAlbum(album))
+        console.log('post album thunk',album)
     } else {
-        return "Error making your post"
+        const album = await res.json()
+        console.log('post,thunk',album)
+        return album
     }
+
 }
 
 

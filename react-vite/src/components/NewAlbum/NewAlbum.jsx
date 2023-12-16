@@ -22,7 +22,7 @@ export default function NewAlbum() {
         // some sort of loading message is a good idea
         setImageLoading(true);
         let data = await dispatch(postAlbumThunk(formData))
-        console.log("UPLOAD COMPLETE")
+        console.log("UPLOAD COMPLETE",data)
     }
 
     return (
