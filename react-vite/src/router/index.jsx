@@ -1,8 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
-import AllAlbums from '../components/AlbumComponents/AllAlbums';
+import AllAlbums from '../components/AllAlbums/AllAlbums';
+import OneAlbum from '../components/OneAlbum/OneAlbum';
 import Layout from './Layout';
+import NewAlbum from '../components/NewAlbum/NewAlbum';
 
 export const router = createBrowserRouter([
   {
@@ -21,8 +23,16 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path: "album",
+        path: "albums",
         element: <AllAlbums />
+      },
+      {
+        path: "albums/:albumId",
+        element: <OneAlbum />
+      },
+      {
+        path: "albums/new",
+        element: <NewAlbum />
       }
     ],
   },
