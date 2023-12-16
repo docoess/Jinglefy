@@ -30,7 +30,7 @@ export default function OneAlbum() {
         }
 
         getAlbums()
-    }, [dispatch])
+    }, [dispatch,albumId])
 
     return album && (
         <>

@@ -39,7 +39,7 @@ def create_album():
 
     form = AlbumForm()
 
-    form["csrf_token"].data = request.cookies["csrf_token"]
+    # form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
         cover_image = form.data["cover_image"]
