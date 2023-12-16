@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { oneAlbumThunk } from "../../redux/album";
 import { useParams } from "react-router-dom";
+import UpdateAlbum from "./OptionButtons/UpdateAlbum";
+import DeleteAlbum from "./OptionButtons/DeleteAlbum";
 
 const formattedDate = (date) => {
     const d = new Date(date);
@@ -20,9 +22,20 @@ export default function OneAlbum() {
 
     let { albumId } = useParams()
     const album = useSelector((state) => state.albums[albumId]);
+    const currentUser = useSelector((state) => state.session.user)
     const [errors, setErrors] = useState(null)
-    const allAlbums = useSelector(state => Object.values(state.albums))
-    console.log("albums:",allAlbums)
+
+    const ownerOptions = () => {
+        if (currentUser != null) {
+            if(album.artist_id == currentUser.id) {
+                return <div>
+                    <UpdateAlbum />
+                    <DeleteAlbum />
+                </div>
+            }
+        }
+    }
+
 
     useEffect(() => {
         const getAlbums = async () => {
@@ -39,7 +52,8 @@ export default function OneAlbum() {
             <p>Number of Songs: {album.num_songs}</p>
             <p>Description: {album.desc}</p>
             <p>Release Date: {formattedDate(album.release_date)}</p>
-            <p>Made by: {album.artist.username}</p>
+            <p>Made by: {album.artist ? album.artist.username : null}</p>
+            {ownerOptions()}
         </>
     )
 }
