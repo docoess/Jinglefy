@@ -1,6 +1,7 @@
 from app.models import db, Album, Song, Playlist, playlist_songs, likes, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import date
+from alembic import op
 
 def seed_albums():
   album_1 = Album(
@@ -127,3 +128,65 @@ def seed_playlists():
 
   db.session.add(playlist_1)
   db.session.commit()
+
+def seed_playlist_songs():
+  op.bulk_insert(playlist_songs,
+                 [
+                   {'song_id':1, 'playlist_id':1, 'created_at':date.today()},
+                   {'song_id':2, 'playlist_id':1, 'created_at':date.today()},
+                   {'song_id':4, 'playlist_id':1, 'created_at':date.today()},
+                   {'song_id':7, 'playlist_id':1, 'created_at':date.today()}
+                 ]
+                 )
+
+def seed_likes():
+  op.bulk_insert(likes,
+                 [
+                   {'song_id':1 , 'user_id': 1},
+                   {'song_id':2 , 'user_id': 1},
+                   {'song_id':4 , 'user_id': 2},
+                   {'song_id':6 , 'user_id': 3},
+                   {'song_id':1 , 'user_id': 3},
+                   {'song_id':2 , 'user_id': 3}
+                 ]
+                 )
+
+def undo_albums():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.albums RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM albums"))
+
+    db.session.commit()
+
+def undo_songs():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.songs RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM songs"))
+
+    db.session.commit()
+
+def undo_playlists():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.playlists RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM playlists"))
+
+    db.session.commit()
+
+def undo_playlist_songs():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.playlist_songs RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM playlist_songs"))
+
+    db.session.commit()
+
+def undo_likes():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.likes RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM likes"))
+
+    db.session.commit()
