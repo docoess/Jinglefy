@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
+from .aws_helpers import get_unique_filename, upload_file_to_s3
 from app.models import Album, db
 from ..forms import AlbumForm
 from datetime import date
@@ -11,7 +12,6 @@ def get_all_albums():
     """
     Returns a list of all albums
     """
-
     albums = [album.to_dict() for album in Album.query.all()]
     return albums
 
@@ -21,7 +21,14 @@ def get_album_by_id(id):
     Returns a specific album specified by id
     """
     album = Album.query.get(id)
-    return album.to_dict()
+
+    artist = album.artist
+    artist_dict = artist.to_dict()
+
+    return_dict = album.to_dict()
+    return_dict['artist'] = artist_dict
+
+    return return_dict
 
 @album_routes.route('/', methods=['POST'])
 @login_required
@@ -29,13 +36,27 @@ def create_album():
     """
     Creates a new Album
     """
+
     form = AlbumForm()
 
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
     if form.validate_on_submit():
+        cover_image = form.data["cover_image"]
+        cover_image.filename = get_unique_filename(cover_image.filename)
+        upload = upload_file_to_s3(cover_image)
+        print("UPLOAD FROM CREATE ALBUM ROUTE: ", upload)
+
+        if "url" not in upload:
+         # if the dictionary doesn't have a url key
+        # it means that there was an error when you tried to upload
+        # so you send back that error message (and you printed it above)
+            return upload
+
         new_album = Album(
-            title = request.json['title'],
-            cover_image = request.json['cover_image'],
-            desc = request.json['desc'],
+            title = form.data["title"],
+            cover_image = form.data[upload["url"]],
+            desc = form.data["desc"],
             artist = current_user,
             num_songs = 0,
             release_date = date.today()

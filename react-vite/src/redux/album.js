@@ -1,11 +1,22 @@
 // ACTION
 const GET_ALBUMS = "/albums/GET_ALBUMS"
-// const GET_AN_ALBUM = "/allAlbums/GET_AN_ALBUM"
+const GET_ONE_ALBUM = "/albums/GET_ONE_ALBUM"
+const POST_ALBUM = '/albums/POST_ALBUM'
 
 
 const getAllAlbums = (albums) => ({
     type: GET_ALBUMS,
     payload: albums
+})
+
+const getOneAlbum = (album) => ({
+    type: GET_ONE_ALBUM,
+    payload: album
+})
+
+const postAlbum = (album) => ({
+    type: POST_ALBUM,
+    payload: album
 })
 
 
@@ -15,11 +26,38 @@ export const allAlbumsThunk = () => async (dispatch) => {
         const albums = await res.json();
         if(albums.errors) {
             console.log(albums.errors)
-            return;
+            return albums.errors;
         }
         dispatch(getAllAlbums(albums))
-        return albums
-    } 
+        return null
+    }
+}
+
+export const oneAlbumThunk = (albumId) => async dispatch => {
+    const res = await fetch (`/api/albums/${albumId}`)
+    if(res.ok) {
+        const album = await res.json()
+        if(album.errors) {
+            console.log(album.errors)
+            return album.errors
+        }
+        dispatch(getOneAlbum(album))
+        return null
+    }
+}
+
+export const postAlbumThunk = (formData) => async dispatch => {
+    const res = await fetch(`/api/albums`, {
+        method: "POST",
+        body: formData
+    });
+
+    if (res.ok) {
+        const album = await res.json();
+        dispatch(getOneAlbum(album))
+    } else {
+        return "Error making your post"
+    }
 }
 
 
@@ -36,6 +74,8 @@ function albumsReducer(state = {}, action) {
 
             return newState
 
+        case GET_ONE_ALBUM:
+            return {...state, [action.payload.id]: action.payload}
         default:
             return state
     }
