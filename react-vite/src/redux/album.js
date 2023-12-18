@@ -47,7 +47,7 @@ export const oneAlbumThunk = (albumId) => async dispatch => {
 }
 
 export const postAlbumThunk = (formData) => async dispatch => {
-    const res = await fetch(`/api/albums`, {
+    const res = await fetch(`/api/albums/new`, {
         method: "POST",
         body: formData
     });

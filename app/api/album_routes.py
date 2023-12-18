@@ -30,7 +30,7 @@ def get_album_by_id(id):
 
     return return_dict
 
-@album_routes.route('/', methods=['POST'])
+@album_routes.route('/new', methods=['POST'])
 @login_required
 def create_album():
     """
@@ -39,12 +39,14 @@ def create_album():
 
     form = AlbumForm()
 
-    # form["csrf_token"].data = request.cookies["csrf_token"]
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    print("FORM CSRF TOKEN: ", form["csrf_token"])
 
     if form.validate_on_submit():
         cover_image = form.data["cover_image"]
         cover_image.filename = get_unique_filename(cover_image.filename)
-        upload = upload_file_to_s3(cover_image)
+        upload = upload_file_to_s3(cover_image, filetype="image")
         print("UPLOAD FROM CREATE ALBUM ROUTE: ", upload)
 
         if "url" not in upload:
@@ -55,8 +57,8 @@ def create_album():
 
         new_album = Album(
             title = form.data["title"],
-            cover_image = form.data[upload["url"]],
-            desc = form.data["desc"],
+            cover_image = upload["url"],
+            desc = form.data["description"],
             artist = current_user,
             num_songs = 0,
             release_date = date.today()
