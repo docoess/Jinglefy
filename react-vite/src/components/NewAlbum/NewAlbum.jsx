@@ -17,7 +17,7 @@ export default function NewAlbum() {
         const formData = new FormData();
         formData.append("cover_image", cover);
         formData.append("title", title)
-        formData.append("desc", desc)
+        formData.append("description", desc)
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);
