@@ -1,8 +1,8 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, redirect
 from flask_login import login_required, current_user
 from .aws_helpers import get_unique_filename, upload_file_to_s3
 from app.models import Album, db
-from ..forms import AlbumForm
+from ..forms import AlbumForm,UpdateAlbumForm
 from datetime import date
 
 album_routes = Blueprint('album', __name__)
@@ -81,3 +81,47 @@ def delete_album(id):
     db.session.delete(target_album)
     db.session.commit()
     return {"message": "Successfully Deleted"}
+
+
+@album_routes.route('/<int:id>/update', methods=['PUT'])
+@login_required
+def update_album(id):
+    """
+    Updates a new Album
+    """
+    
+
+
+    form = UpdateAlbumForm()
+    
+    
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    # print("FORM CSRF TOKEN: ", form["csrf_token"])
+
+    if form.validate_on_submit():
+        album = Album.query.get(id)
+        print('albumsssssssssss',album)
+        cover_image = form.data["cover_image"]
+        cover_image.filename = get_unique_filename(cover_image.filename)
+        upload = upload_file_to_s3(cover_image, filetype="image")
+        print("UPLOAD FROM CREATE ALBUM ROUTE: ", upload)
+
+        if "url" not in upload:
+         # if the dictionary doesn't have a url key
+        # it means that there was an error when you tried to upload
+        # so you send back that error message (and you printed it above)
+            return upload
+        
+        album.title = form.data["title"]
+        album.cover_image = upload["url"]
+        album.desc = form.data["description"]
+          
+    
+        
+        db.session.commit()
+
+        return album.to_dict()
+    else:
+        print(form.errors)
+        return form.errors
