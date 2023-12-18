@@ -1,18 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { allAlbumsThunk } from "../../redux/album";
-
-const formattedDate = (date) => {
-    const d = new Date(date);
-    const cd = (num) => num.toString().padStart(2, 0);
-    return (
-        d.getFullYear() +
-        "-" +
-        cd(d.getMonth() + 1) +
-        "-" +
-        cd(d.getDate())
-    );
-};
+import AlbumCard from "./AlbumCard";
 
 export default function AllAlbums() {
     const dispatch = useDispatch();
@@ -28,17 +17,13 @@ export default function AllAlbums() {
         getAlbums()
     }, [dispatch])
 
+
     return (
         <>
-            <div className="Testing">
+            <div>
                 {errors && <p>{errors}</p>}
                 {allAlbums.map(album => (
-                    <>
-                        <p>{album.title}</p>
-                        <img src={album.cover_image}/>
-                        <p>{album.num_songs} Songs</p>
-                        <p>Released on {formattedDate(album.release_date)}</p>
-                    </>
+                    <AlbumCard album={album} />
                 ))}
             </div>
         </>
