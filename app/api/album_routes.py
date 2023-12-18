@@ -41,7 +41,7 @@ def create_album():
 
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    print("FORM CSRF TOKEN: ", form["csrf_token"])
+    # print("FORM CSRF TOKEN: ", form["csrf_token"])
 
     if form.validate_on_submit():
         cover_image = form.data["cover_image"]
@@ -71,14 +71,13 @@ def create_album():
         print(form.errors)
         return form.errors
 
-@album_routes.route('/<int:id>', methods=['DELETE'])
+@album_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required
 def delete_album(id):
     target_album = Album.query.get(id)
 
-    if target_album.artist_id == current_user.id:
-        db.session.delete(target_album)
-        db.session.commit()
-        return {"message": "Successfully Deleted"}
-    else:
-        return {"errors": {"message" : "Forbidden"}}
+    # if target_album.artist_id == current_user.id:
+    print('HERE IN THE BACKEND:',target_album)
+    db.session.delete(target_album)
+    db.session.commit()
+    return {"message": "Successfully Deleted"}
