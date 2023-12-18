@@ -6,6 +6,7 @@ import OneAlbum from '../components/OneAlbum/OneAlbum';
 import Layout from './Layout';
 import NewAlbum from '../components/NewAlbum/NewAlbum';
 import LandingPage from '../components/LandingPage/LandingPage';
+import UpdateAlbums from '../components/UpdateAlbums/UpdateAlbums';
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "albums/new",
         element: <NewAlbum />
+      },
+      {
+        path : "albums/:albumId/update",
+        element: <UpdateAlbums />
       }
     ],
   },
