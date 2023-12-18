@@ -99,7 +99,7 @@ export const deleteAlbumThunk = (albumId) => async dispatch => {
 function albumsReducer(state = {}, action) {
     switch (action.type) {
 
-        case GET_ALBUMS:
+        case GET_ALBUMS: {
             // console.log(action.payload)
             // console.log(state)
             const newState = {...state}
@@ -108,8 +108,9 @@ function albumsReducer(state = {}, action) {
             });
 
             return newState
+        }
 
-        case GET_ONE_ALBUM:
+        case GET_ONE_ALBUM: {
             return {...state, [action.payload.id]: action.payload}
 
         case DELETE_ALBUM:
@@ -117,7 +118,6 @@ function albumsReducer(state = {}, action) {
             const newStateDelete = {...state}
             delete newStateDelete[action.payload.id]
             return newStateDelete
-
 
         default:
             return state
