@@ -1,4 +1,4 @@
-from app.models import db, Album, Song, Playlist, playlist_songs, likes, environment, SCHEMA
+from app.models import db, User, Album, Song, Playlist, playlist_songs, likes, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import date
 from alembic import op
@@ -37,18 +37,22 @@ def seed_albums():
   db.session.commit()
 
 def seed_songs():
+  users = User.query.all()
+
   song_1 = Song(
     title='Sunrise Over Miami',
     album_id=1,
     track_num=1,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/0f51463153924849a20a40be10b0aff2.mp3'
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/0f51463153924849a20a40be10b0aff2.mp3',
+    song_likes=[users[0], users[1]]
   )
 
   song_2 = Song(
     title='Sunset Over Prague',
     album_id=1,
     track_num=2,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/1be9d2a377b24c649c18169fa9da5489.mp3'
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/1be9d2a377b24c649c18169fa9da5489.mp3',
+    song_likes=[users[2]]
   )
 
   song_3 = Song(
@@ -120,36 +124,17 @@ def seed_songs():
   db.session.commit()
 
 def seed_playlists():
+  songs = Song.query.all()
+
   playlist_1 = Playlist(
     title='My Jams',
     owner_id=3,
-    cover_img='https://week-20-awsbucket-dr.s3.us-west-2.amazonaws.com/b675637d431348a8b743c7aa38930388.jpg'
+    cover_img='https://week-20-awsbucket-dr.s3.us-west-2.amazonaws.com/b675637d431348a8b743c7aa38930388.jpg',
+    playlist_songs=[songs[2], songs[3], songs[6]]
   )
 
   db.session.add(playlist_1)
   db.session.commit()
-
-def seed_playlist_songs():
-  op.bulk_insert(playlist_songs,
-                 [
-                   {'song_id':1, 'playlist_id':1, 'created_at':date.today()},
-                   {'song_id':2, 'playlist_id':1, 'created_at':date.today()},
-                   {'song_id':4, 'playlist_id':1, 'created_at':date.today()},
-                   {'song_id':7, 'playlist_id':1, 'created_at':date.today()}
-                 ]
-                 )
-
-def seed_likes():
-  op.bulk_insert(likes,
-                 [
-                   {'song_id':1 , 'user_id': 1},
-                   {'song_id':2 , 'user_id': 1},
-                   {'song_id':4 , 'user_id': 2},
-                   {'song_id':6 , 'user_id': 3},
-                   {'song_id':1 , 'user_id': 3},
-                   {'song_id':2 , 'user_id': 3}
-                 ]
-                 )
 
 def undo_albums():
     if environment == "production":
