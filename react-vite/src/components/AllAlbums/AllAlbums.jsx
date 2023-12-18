@@ -23,7 +23,7 @@ export default function AllAlbums() {
             <div>
                 {errors && <p>{errors}</p>}
                 {allAlbums.map(album => (
-                    <AlbumCard album={album} />
+                    <AlbumCard key={album.id} album={album} />
                 ))}
             </div>
         </>
