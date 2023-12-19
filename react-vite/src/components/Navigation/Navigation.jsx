@@ -1,17 +1,19 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import { useSelector } from "react-redux";
-import "./Navigation.css";
 import jinglefyLogo from "../../../public/jinglefy-high-resolution-logo-transparent.png"
+import OpenModalMenuItem from "./OpenModalMenuItem";
+import LoginFormModal from "../LoginFormModal";
+import "./Navigation.css";
 
 function Navigation() {
   const user = useSelector((store) => store.session.user);
   return (
     <div className="navbar-container">
 
-      <div className="navbar-logo-container">
+      <NavLink to='/' className="navbar-logo-container">
         <img src={jinglefyLogo} className="navbar-logo"/>
-      </div>
+      </NavLink>
 
       <div className="navbar-link-container">
         <NavLink to="/" className="navbar-link">Home</NavLink>
@@ -22,6 +24,7 @@ function Navigation() {
 
       {user ? (
         <>
+        <NavLink to='/albums/new' className="navbar-link">Create Album</NavLink>
           <ProfileButton />
         </>
         )
@@ -29,7 +32,11 @@ function Navigation() {
         (
           <>
             <NavLink to="/signup" className="navbar-link">Sign Up</NavLink>
-            <NavLink to="/login" className="navbar-link">Log In</NavLink>
+            <div className="navbar-link">
+              <OpenModalMenuItem  itemText="Log In"
+                  modalComponent={<LoginFormModal />}
+                />
+            </div>
           </>
         )
       }
