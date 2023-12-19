@@ -44,7 +44,7 @@ export default function OneAlbum() {
         }
 
         getAlbums()
-    }, [dispatch,albumId])
+    }, [dispatch, albumId])
 
     return album && (
         <div>

@@ -56,16 +56,26 @@ export const allAlbumsThunk = () => async (dispatch) => {
 }
 
 export const oneAlbumThunk = (albumId) => async dispatch => {
-    const res = await fetch (`/api/albums/${albumId}`)
-    if(res.ok) {
-        const album = await res.json()
-        if(album.errors) {
-            console.log(album.errors)
-            return album.errors
+    try{
+
+        const res = await fetch (`/api/albums/${albumId}`)
+        if(res.ok) {
+            const album = await res.json()
+            console.log("Album from One Album Thunk: ", album)
+            if(album.errors) {
+                console.log(album.errors)
+                return album.errors
+            }
+            dispatch(getOneAlbum(album))
+            return null
         }
-        dispatch(getOneAlbum(album))
-        return null
+
+    } catch(error) {
+        console.log('catchj errror', error)
+        return error
     }
+
+
 }
 
 export const postAlbumThunk = (formData) => async dispatch => {
@@ -229,7 +239,7 @@ function albumsReducer(state = {}, action) {
             const formData = action.payload
             const songs = newState.songs
             newState[action.payload.albumId]['songs'] = {}
-            newState[action.payload.albumId]['songs'][action.payload.song.id] = action.payload.song.id
+            newState[action.payload.albumId]['songs'][action.payload.song.id] = action.payload.song
             return newState
         }
 

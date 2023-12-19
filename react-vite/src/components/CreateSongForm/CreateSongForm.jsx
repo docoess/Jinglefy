@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { postSongThunk } from "../../redux/album";
+import { postSongThunk, oneAlbumThunk } from "../../redux/album";
 
 export default function CreateSongForm() {
   const [title, setTitle] = useState('')
@@ -9,6 +9,14 @@ export default function CreateSongForm() {
   const [audioLoading, setAudioLoading] = useState(false)
   const dispatch = useDispatch()
   const { albumId } = useParams()
+
+  useEffect(() => {
+    const getAlbum = async () => {
+      await dispatch(oneAlbumThunk(albumId))
+    }
+
+    getAlbum()
+}, [dispatch,albumId])
 
 
   const handleSubmit = async (e) => {

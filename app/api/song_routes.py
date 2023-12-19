@@ -52,7 +52,9 @@ def create_song():
       song_link = upload["url"],
       album_id = form.data['album_id'],
       track_num = album.num_songs + 1
+
     )
+    album.num_songs = album.num_songs + 1
 
     db.session.add(new_song)
     db.session.commit()
