@@ -7,6 +7,7 @@ import Layout from './Layout';
 import NewAlbum from '../components/NewAlbum/NewAlbum';
 import LandingPage from '../components/LandingPage/LandingPage';
 import UpdateAlbums from '../components/UpdateAlbums/UpdateAlbums';
+import CreateSongForm from '../components/CreateSongForm/CreateSongForm';
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path : "albums/:albumId/update",
         element: <UpdateAlbums />
+      },
+      {
+        path: "albums/:albumId/new-song",
+        element: <CreateSongForm />
       }
     ],
   },

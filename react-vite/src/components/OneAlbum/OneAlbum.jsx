@@ -4,6 +4,7 @@ import { oneAlbumThunk } from "../../redux/album";
 import { useParams } from "react-router-dom";
 import UpdateAlbum from "./OptionButtons/UpdateAlbum";
 import DeleteAlbum from "./OptionButtons/DeleteAlbum";
+import SongCard from "../SongCard/SongCard";
 
 const formattedDate = (date) => {
     const d = new Date(date);
@@ -56,9 +57,7 @@ export default function OneAlbum() {
             {ownerOptions()}
             {
                 album.songs?.map(song => (
-                    <div key={song.id}>
-                        <span>{song.track_num}. </span><span>{song.title}</span><span><audio controls src={song.song_link}>placeholder</audio></span>
-                    </div>
+                    <SongCard song={song} key={song.id} />
                 ))
             }
         </div>
