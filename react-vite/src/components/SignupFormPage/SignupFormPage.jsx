@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { thunkSignup } from "../../redux/session";
+import './SignupForm.css'
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -41,21 +42,21 @@ function SignupFormPage() {
   };
 
   return (
-    <>
-      <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
-        <label>
+    <div className="sign-up-container">
+      <h1 className="sign-up-header">Create your Jinglefy account!</h1>
+      {errors.server && <p className="error">{errors.server}</p>}
+      <form onSubmit={handleSubmit} className="sign-up-form">
+        <label className="sign-up-input">
           Email
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            // required
           />
+        {errors.email && <p className="error">{errors.email}</p>}
         </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
+        <label className="sign-up-input">
           Username
           <input
             type="text"
@@ -63,9 +64,9 @@ function SignupFormPage() {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
+        {errors.username && <p className="error">{errors.username}</p>}
         </label>
-        {errors.username && <p>{errors.username}</p>}
-        <label>
+        <label className="sign-up-input">
           Password
           <input
             type="password"
@@ -73,9 +74,9 @@ function SignupFormPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+        {errors.password && <p className="error">{errors.password}</p>}
         </label>
-        {errors.password && <p>{errors.password}</p>}
-        <label>
+        <label className="sign-up-input">
           Confirm Password
           <input
             type="password"
@@ -83,11 +84,11 @@ function SignupFormPage() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
+        {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button className="sign-up-submit-button" type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
