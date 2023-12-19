@@ -12,13 +12,13 @@ const formattedDate = (date) => {
     );
 };
 
-export default function AlbumCard({ album, key }) {
+export default function AlbumCard({ album }) {
     const redirect = useNavigate();
     const onClick = () => {
        return redirect(`${album.id}`)
     }
     return (
-       <div onClick={onClick} key={key} className="album-card">
+       <div onClick={onClick} className="album-card">
             <p className="album-card-title">{album.title}</p>
             <img src={album.cover_image} className="album-card-image"/>
             <p className="album-card-num-songs">{album.num_songs} Songs</p>

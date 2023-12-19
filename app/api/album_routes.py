@@ -1,6 +1,6 @@
-from flask import Blueprint, request, redirect
+from flask import Blueprint, request, make_response
 from flask_login import login_required, current_user
-from .aws_helpers import get_unique_filename, upload_file_to_s3
+from .aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 from app.models import Album, db
 from ..forms import AlbumForm,UpdateAlbumForm
 from datetime import date
@@ -22,11 +22,14 @@ def get_album_by_id(id):
     """
     album = Album.query.get(id)
 
+    songs = [song.to_dict() for song in album.songs]
+
     artist = album.artist
     artist_dict = artist.to_dict()
 
     return_dict = album.to_dict()
     return_dict['artist'] = artist_dict
+    return_dict['songs'] = songs
 
     return return_dict
 
@@ -76,10 +79,15 @@ def create_album():
 def delete_album(id):
     target_album = Album.query.get(id)
 
+    # owner_id = target_album.artist_id
+
     # if target_album.artist_id == current_user.id:
+    old_url = target_album.cover_image
     print('HERE IN THE BACKEND:',target_album)
     db.session.delete(target_album)
     db.session.commit()
+
+    remove_file_from_s3(old_url, filetype='image')
     return {"message": "Successfully Deleted"}
 
 
@@ -89,12 +97,12 @@ def update_album(id):
     """
     Updates a new Album
     """
-    
+
 
 
     form = UpdateAlbumForm()
-    
-    
+
+
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     # print("FORM CSRF TOKEN: ", form["csrf_token"])
@@ -112,13 +120,13 @@ def update_album(id):
         # it means that there was an error when you tried to upload
         # so you send back that error message (and you printed it above)
             return upload
-        
+
         album.title = form.data["title"]
         album.cover_image = upload["url"]
         album.desc = form.data["description"]
-          
-    
-        
+
+
+
         db.session.commit()
 
         return album.to_dict()
