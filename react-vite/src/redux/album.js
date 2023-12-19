@@ -3,7 +3,7 @@ const GET_ALBUMS = "/albums/GET_ALBUMS"
 const GET_ONE_ALBUM = "/albums/GET_ONE_ALBUM"
 const POST_ALBUM = '/albums/POST_ALBUM'
 const DELETE_ALBUM = '/albums/DELETE_ALBUM'
-
+const UPDATE_ALBUM = '/albums/UPDATE_ALBUM'
 
 const getAllAlbums = (albums) => ({
     type: GET_ALBUMS,
@@ -25,6 +25,10 @@ const deleteAlbum = (albumId) => ({
     payload: albumId
 })
 
+const updateAlbum = (albumId) => ({
+    type: UPDATE_ALBUM,
+    payload: albumId
+})
 
 export const allAlbumsThunk = () => async (dispatch) => {
     const res = await fetch("/api/albums");
@@ -70,6 +74,32 @@ export const postAlbumThunk = (formData) => async dispatch => {
 
 }
 
+export const updateALbumThunk = (albumId,formData) => async dispath => {
+    console.log('update thunk ',albumId,formData)
+    try {
+        const res = await fetch(`/api/albums/${albumId}/update`, {
+            method: "PUT",
+            body: formData
+        })
+
+        if (res.ok) {
+            const album = await res.json()
+            dispath(updateAlbum(albumId))
+            console.log('update album in fetc',album)
+        }
+        else {
+            const album = await res.json()
+            return album
+        }
+    } catch(error) {
+        console.log('catchj errror', error)
+        return error
+    }
+
+}
+
+
+
 export const deleteAlbumThunk = (albumId) => async dispatch => {
     try {
 
@@ -77,7 +107,7 @@ export const deleteAlbumThunk = (albumId) => async dispatch => {
         const res = await fetch(`/api/albums/${albumId}/delete`, {
             method: 'DELETE'
         })
-        
+
         if (res.ok) {
             const album = await res.json();
             console.log(album)
@@ -112,12 +142,23 @@ function albumsReducer(state = {}, action) {
 
         case GET_ONE_ALBUM: {
             return {...state, [action.payload.id]: action.payload}
+        }
+
+        case POST_ALBUM: {
+            const newState = {...state}
+            return {...newState, [action.payload.id]: action.payload}
+        }
 
         case DELETE_ALBUM:
             console.log('made it to reducer')
             const newStateDelete = {...state}
             delete newStateDelete[action.payload.id]
             return newStateDelete
+
+        case UPDATE_ALBUM: {
+            const newState = {...state, [action.payload]:{...state[action.payload]}}
+            return newState
+        }
 
         default:
             return state

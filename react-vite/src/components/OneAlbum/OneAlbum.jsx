@@ -46,7 +46,7 @@ export default function OneAlbum() {
     }, [dispatch,albumId])
 
     return album && (
-        <>
+        <div>
             <p>Title: {album.title}</p>
             <img src={album.cover_image}/>
             <p>Number of Songs: {album.num_songs}</p>
@@ -54,6 +54,13 @@ export default function OneAlbum() {
             <p>Release Date: {formattedDate(album.release_date)}</p>
             <p>Made by: {album.artist ? album.artist.username : null}</p>
             {ownerOptions()}
-        </>
+            {
+                album.songs?.map(song => (
+                    <div key={song.id}>
+                        <span>{song.track_num}. </span><span>{song.title}</span><span><audio controls src={song.song_link}>placeholder</audio></span>
+                    </div>
+                ))
+            }
+        </div>
     )
 }
