@@ -1,0 +1,35 @@
+.all-albums-header{
+    text-align: center;
+    color: white;
+    font-size: 50px;
+}
+
+.all-albums-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.album-card{
+    margin: 10px;
+    background-color: #58019C;
+    padding: 1%;
+    border-radius: 10px;
+    color: #74A2FF;
+    font-size: 18px;
+    box-shadow: 2px 2px 2px 2px;
+    text-align: center;
+}
+
+.album-card:hover{
+    cursor: pointer;
+    box-shadow: 4px 4px 4px 4px;
+}
+
+.album-card-image{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    border: 2px solid black
+}
