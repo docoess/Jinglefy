@@ -1,1 +1,10 @@
 /* TODO: Add sitewide styles */
+*{
+    font-family: 'Dosis', sans-serif;
+}
+
+body{
+    background-color: #36454F;
+    margin: 0px;
+
+}

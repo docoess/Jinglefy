@@ -1,3 +1,36 @@
 .profile-dropdown {
   position: absolute;
 }
+
+.navbar-container{
+  background-color: #58019C;
+  display: flex;
+  justify-content: space-between;
+  height: 10%;
+}
+
+.navbar-link-container{
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: space-around;
+}
+
+.navbar-link{
+  color: #74A2FF;
+  text-decoration: none;
+}
+
+.navbar-link:hover{
+  text-decoration: underline;
+}
+
+.navbar-logo-container{
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-logo{
+  height: 50px;
+
+}

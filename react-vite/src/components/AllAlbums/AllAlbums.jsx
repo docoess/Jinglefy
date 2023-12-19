@@ -20,7 +20,8 @@ export default function AllAlbums() {
 
     return (
         <>
-            <div>
+            <h1 className="all-albums-header">Browse all of our Jingle Albums!</h1>
+            <div className="all-albums-container">
                 {errors && <p>{errors}</p>}
                 {allAlbums.map(album => (
                     <AlbumCard album={album} key={album.id}/>
