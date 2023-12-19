@@ -48,12 +48,13 @@ export default function NewAlbum() {
 
     return (
 
-        <>
-            <h1>Create a new album!</h1>
+        <div className="new-album-container">
+            <h1 className="new-album-header">Update your album!</h1>
             <form
+            className="new-album-form"
             onSubmit={handleSubmit}
             encType="multipart/form-data">
-                <label>
+                <label className="new-album-input">
                     What is the title for your album?
                     <input
                     type="text"
@@ -63,17 +64,18 @@ export default function NewAlbum() {
                     required
                     />
                 </label>
-                <label>
-                    Give a brief description of your Album, it can be about whatever aspect of it that you want!
-                    <input
+                <label className="new-album-input">
+                    Give a brief description of your Album
+                    <textarea
                     type="text"
                     value={desc}
                     placeholder="Album Description"
                     onChange={(e) => setDesc(e.target.value)}
                     required
+                    className="new-album-desc"
                     />
                 </label>
-                <label>
+                <label className="new-album-input">
                     Upload a cover image for your album!
                     <input
                     type="file"
@@ -81,9 +83,9 @@ export default function NewAlbum() {
                     onChange={(e) => setCover(e.target.files[0])}
                     />
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit" className="new-album-submit-button">Submit</button>
                 {(imageLoading)&& <p>Loading...</p>}
             </form>
-        </>
+        </div>
     )
 }
