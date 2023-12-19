@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import { useSelector } from "react-redux";
-import jinglefyLogo from "../../../public/jinglefy-high-resolution-logo-transparent.png"
+import jinglefyLogo from "../../jinglefy-high-resolution-logo-transparent.png"
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import "./Navigation.css";

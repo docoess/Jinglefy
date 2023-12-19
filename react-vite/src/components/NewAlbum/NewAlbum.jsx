@@ -44,7 +44,7 @@ export default function NewAlbum() {
                     />
                 </label>
                 <label className="new-album-input">
-                   <span>Give a description of your Album!</span> 
+                   <span>Give a description of your Album!</span>
                     <textarea
                     type="text"
                     value={desc}
