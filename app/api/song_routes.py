@@ -3,7 +3,6 @@ from flask_login import login_required, current_user
 from .aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 from app.models import Album, db, Song
 from ..forms import SongForm, SongUpdateForm
-from datetime import date
 
 song_routes = Blueprint('song', __name__)
 
