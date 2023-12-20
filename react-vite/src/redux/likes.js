@@ -17,6 +17,34 @@ export const getLikesThunk = () => async (dispatch) => {
   }
 }
 
+export const addLikeThunk = (songId) => async (dispatch) => {
+  const res = await fetch(`/api/songs/${songId}/like`, {
+    method: 'POST'
+  })
+  if (res.ok) {
+    const likes = await res.json()
+    dispatch(getLikes(likes))
+  } else {
+    const error = await res.json();
+    console.log(error)
+    return error
+  }
+}
+
+export const removeLikeThunk = (songId) => async (dispatch) => {
+  const res = await fetch(`/api/songs/${songId}/unlike`, {
+    method: 'PATCH'
+  })
+  if (res.ok) {
+    const likes = await res.json()
+    dispatch(getLikes(likes))
+  } else {
+    const error = await res.json();
+    console.log(error)
+    return error
+  }
+}
+
 function likesReducer(state = {}, action) {
   switch (action.type) {
     case GET_LIKES: {
