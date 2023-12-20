@@ -85,48 +85,99 @@ def create_playlist():
     else:
         print(form.errors)
         return form.errors
-    
+
 
 
 @playlist_routes.route('/<int:id>/update', methods=['PUT'])
 @login_required
 def update_playlist(id):
     """
-    Creates a new playlist
+    Updates a playlist
     """
     print("HEY! LISTEN!")
     form = UpdatePlaylistForm()
 
+    playlist = Playlist.query.get(id)
+
     form["csrf_token"].data = request.cookies["csrf_token"]
+
+    owner_id = playlist.owner_id
+
+    if current_user.id != owner_id:
+        response = make_response({ "errors": { "message": "forbidden"} }, 401)
+        return response
 
     # print("FORM CSRF TOKEN: ", form["csrf_token"])
 
     if form.validate_on_submit():
-        playlist = Playlist.query.get()
-        cover_image = form.data["cover_image"]
-        cover_image.filename = get_unique_filename(cover_image.filename)
-        upload = upload_file_to_s3(cover_image, filetype="image")
-        print("UPLOAD FROM CREATE ALBUM ROUTE: ", upload)
 
-        if "url" not in upload:
-         # if the dictionary doesn't have a url key
-        # it means that there was an error when you tried to upload
-        # so you send back that error message (and you printed it above)
-            return upload
-# todo: finish the rest
-        new_playlist = Playlist(
-            title = form.data["title"],
-            cover_img = upload["url"],
-            user = current_user
-        )
+        if form.data['title']:
+            playlist.title = form.data['title']
 
-        db.session.add(new_playlist)
+        if form.data['cover_image'] != 'undefined':
+            print(" ")
+            print("cover image from update playlist: ", form.data["cover_image"])
+            print(" ")
+            old_cover = playlist.cover_img
+            cover_image = form.data["cover_image"]
+            cover_image.filename = get_unique_filename(cover_image.filename)
+            upload = upload_file_to_s3(cover_image, filetype="image")
+            print("UPLOAD FROM CREATE ALBUM ROUTE: ", upload)
+
+            if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when you tried to upload
+            # so you send back that error message (and you printed it above)
+                return upload
+
+            remove_file_from_s3(old_cover, filetype='image')
+
+            playlist.cover_img = upload['url']
+
         db.session.commit()
 
-        return_dict = new_playlist.to_dict()
+        return_dict = playlist.to_dict()
         return_dict['owner'] = current_user.to_dict()
-        return_dict['songs'] = []
+        return_dict['songs'] = [song.to_dict() for song in playlist.playlist_songs]
         return return_dict
     else:
         print(form.errors)
         return form.errors
+
+
+@playlist_routes.route('/<int:id>/delete', methods=['DELETE'])
+@login_required
+def delete_playlist(id):
+    """
+    Deletes a playlist
+    """
+
+    target_playlist = Playlist.query.get(id)
+
+    owner_id = target_playlist.owner_id
+
+    if current_user.id != owner_id:
+        response = make_response({ "errors": { "message": "forbidden"} }, 401)
+        return response
+
+    old_url = target_playlist.cover_img
+
+    db.session.delete(target_playlist)
+    db.session.commit()
+
+    remove_file_from_s3(old_url, filetype='image')
+    return {"message": "Successfully Deleted"}
+
+
+
+@playlist_routes.route('/<int:id>/add-song', methods=['POST'])
+@login_required
+def add_song_to_playlist(id):
+
+    playlist = Playlist.query.get(id)
+
+    song_id = request
+
+    print("REQUEST FOR ADD SONG: ", song_id)
+
+    return {"message": "still testing"}
