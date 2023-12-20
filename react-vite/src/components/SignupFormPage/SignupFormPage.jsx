@@ -45,7 +45,7 @@ function SignupFormPage() {
     <div className="sign-up-container">
       <h1 className="sign-up-header">Create your Jinglefy account!</h1>
       {errors.server && <p className="error">{errors.server}</p>}
-      <form onSubmit={handleSubmit} className="sign-up-form">
+      <form className="sign-up-form" onSubmit={handleSubmit}>
         <label className="sign-up-input">
           Email
           <input

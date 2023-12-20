@@ -42,6 +42,7 @@ const postSong = (song, albumId) => ({
     payload: {song, albumId}
 })
 
+
 export const allAlbumsThunk = () => async (dispatch) => {
     const res = await fetch("/api/albums");
     if(res.ok) {
@@ -55,13 +56,12 @@ export const allAlbumsThunk = () => async (dispatch) => {
     }
 }
 
+
 export const oneAlbumThunk = (albumId) => async dispatch => {
     try{
-
         const res = await fetch (`/api/albums/${albumId}`)
         if(res.ok) {
             const album = await res.json()
-            console.log("Album from One Album Thunk: ", album)
             if(album.errors) {
                 console.log(album.errors)
                 return album.errors
@@ -69,14 +69,12 @@ export const oneAlbumThunk = (albumId) => async dispatch => {
             dispatch(getOneAlbum(album))
             return null
         }
-
     } catch(error) {
-        console.log('catchj errror', error)
+        console.log('catch error', error)
         return error
     }
-
-
 }
+
 
 export const postAlbumThunk = (formData) => async dispatch => {
     const res = await fetch(`/api/albums/new`, {
@@ -97,8 +95,9 @@ export const postAlbumThunk = (formData) => async dispatch => {
 
 }
 
-export const updateALbumThunk = (albumId,formData) => async dispath => {
-    console.log('update thunk ',albumId,formData)
+
+export const updateALbumThunk = (albumId,formData) => async dispatch => {
+    console.log('update thunk ', albumId, formData)
     try {
         const res = await fetch(`/api/albums/${albumId}/update`, {
             method: "PUT",
@@ -107,45 +106,42 @@ export const updateALbumThunk = (albumId,formData) => async dispath => {
 
         if (res.ok) {
             const album = await res.json()
-            dispath(updateAlbum(albumId))
-            console.log('update album in fetc',album)
+            dispatch(updateAlbum(albumId))
+            console.log('update album in fetch',album)
         }
         else {
             const album = await res.json()
             return album
         }
     } catch(error) {
-        console.log('catchj errror', error)
+        console.log('catch error: ', error)
         return error
     }
 
 }
 
 
-
 export const deleteAlbumThunk = (albumId) => async dispatch => {
     try {
-
-        console.log('Top of Thunk')
         const res = await fetch(`/api/albums/${albumId}/delete`, {
             method: 'DELETE'
         })
 
         if (res.ok) {
             const album = await res.json();
-            console.log(album)
             dispatch(deleteAlbum(albumId))
         } else {
-            const err = await res.json()
-            console.log('HERE:',err)
+            const error = await res.json()
+            console.log(error)
             return null
         }
-        console.log('bottom')
+
     } catch (error) {
-        console.log('catch error:',error)
+        console.log('catch error: ',error)
         return error
     }
 }
+
 
 export const deleteSongThunk = (songId) => async dispatch => {
     console.log(songId)
@@ -197,8 +193,6 @@ function albumsReducer(state = {}, action) {
     switch (action.type) {
 
         case GET_ALBUMS: {
-            // console.log(action.payload)
-            // console.log(state)
             const newState = {...state}
             action.payload.forEach(album => {
                 newState[album.id] = album

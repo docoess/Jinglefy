@@ -1,8 +1,6 @@
-import { useState } from "react"
 import { postPlaylistThunk } from "../../redux/playlist"
 import { useDispatch } from "react-redux"
-
-
+import { useState } from "react"
 
 //todo: Error handling 
 export default function CreatePlaylistPage() {
@@ -10,7 +8,7 @@ export default function CreatePlaylistPage() {
     const [title, setTitle] = useState("")
     const [cover, setCover] = useState(null)
     const [imageLoading, setImageLoading] = useState(false)
-    const [errors, setErrors] = useState({})
+    // const [errors, setErrors] = useState({})
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,16 +19,16 @@ export default function CreatePlaylistPage() {
         // some sort of loading message is a good idea
         setImageLoading(true);
         let data = await dispatch(postPlaylistThunk(formData))
-        console.log("UPLOAD COMPLETE",data)
+        console.log("UPLOAD COMPLETE", data)
     }
 
     return (
         <div className="new-playlist-container">
             <h1 className="new-playlist-header">Create a new playlist!</h1>
             <form
+            className="new-playlist-form"
             onSubmit={handleSubmit}
-            encType="multipart/form-data"
-            className="new-playlist-form">
+            encType="multipart/form-data">
                 <label className="new-playlist-input">
                    <span>What is the title for your playlist?</span>
                     <input
@@ -49,7 +47,7 @@ export default function CreatePlaylistPage() {
                     onChange={(e) => setCover(e.target.files[0])}
                     />
                 </label>
-                <button type="submit" className="new-playlist-submit-button">Submit</button>
+                <button className="new-playlist-submit-button" type="submit">Submit</button>
                 {(imageLoading)&& <p>Loading...</p>}
             </form>
         </div>

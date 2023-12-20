@@ -1,12 +1,13 @@
-import { useDispatch, useSelector } from "react-redux"
-import { oneAlbumThunk, deleteSongThunk } from "../../redux/album"
-import { useEffect } from "react"
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
-import DeleteSongModal from "./DeleteSongModal"
+import { useDispatch, useSelector } from "react-redux";
+import { oneAlbumThunk, deleteSongThunk } from "../../redux/album";
+import { useEffect } from "react";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import DeleteSongModal from "./DeleteSongModal";
 
 export default function SongCard({ song }) {
+  const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user)
-  const dispatch = useDispatch()
+
   useEffect(() => {
     const getAlbum = async () => {
       await dispatch(oneAlbumThunk(song.album_id))
@@ -14,6 +15,7 @@ export default function SongCard({ song }) {
 
     getAlbum()
   }, [dispatch, song.album_id])
+
 
   const handleDeleteButton = async (e) => {
     e.preventDefault()

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
-import { oneAlbumThunk } from "../../redux/album";
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import UpdateAlbum from "./OptionButtons/UpdateAlbum";
 import DeleteAlbum from "./OptionButtons/DeleteAlbum";
+import { oneAlbumThunk } from "../../redux/album";
+import { useEffect, useState } from "react";
 import SongCard from "../SongCard/SongCard";
 
 const formattedDate = (date) => {
@@ -20,19 +20,22 @@ const formattedDate = (date) => {
 
 export default function OneAlbum() {
     const dispatch = useDispatch();
-
-    let { albumId } = useParams()
+    const navigate = useNavigate();
+    const { albumId } = useParams();
     const album = useSelector((state) => state.albums[albumId]);
     const currentUser = useSelector((state) => state.session.user)
     const [errors, setErrors] = useState(null)
-    const navigate = useNavigate()
 
 
-    console.log('album in one album',album)
+
     let songs;
-    if (album.songs) { 
-         songs = Object.values(album.songs)
-        console.log('soongdgggggg',songs)
+    if(album != undefined) {
+    // ? ^ trying to key into undefined in ANY way throws an error
+    // best solution I've found is != null/undefined
+        if (album.songs) { 
+             songs = Object.values(album.songs)
+
+        }
     }
 
     const ownerOptions = () => {
@@ -53,7 +56,7 @@ export default function OneAlbum() {
         }
 
         getAlbums()
-        navigate(`/albums/${albumId}`)
+        // navigate(`/albums/${albumId}`)
     }, [dispatch, albumId])
 
 
