@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { oneAlbumThunk } from "../../redux/album";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import UpdateAlbum from "./OptionButtons/UpdateAlbum";
 import DeleteAlbum from "./OptionButtons/DeleteAlbum";
 import SongCard from "../SongCard/SongCard";
@@ -25,6 +25,15 @@ export default function OneAlbum() {
     const album = useSelector((state) => state.albums[albumId]);
     const currentUser = useSelector((state) => state.session.user)
     const [errors, setErrors] = useState(null)
+    const navigate = useNavigate()
+
+
+    console.log('album in one album',album)
+    let songs;
+    if (album.songs) { 
+         songs = Object.values(album.songs)
+        console.log('soongdgggggg',songs)
+    }
 
     const ownerOptions = () => {
         if (currentUser != null) {
@@ -44,7 +53,9 @@ export default function OneAlbum() {
         }
 
         getAlbums()
+        navigate(`/albums/${albumId}`)
     }, [dispatch, albumId])
+
 
     return album && (
         <div>
@@ -56,7 +67,7 @@ export default function OneAlbum() {
             <p>Made by: {album.artist ? album.artist.username : null}</p>
             {ownerOptions()}
             {
-                album.songs?.map(song => (
+                songs?.map(song => (
                     <SongCard song={song} key={song.id} />
                 ))
             }
