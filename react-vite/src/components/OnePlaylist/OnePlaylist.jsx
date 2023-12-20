@@ -41,7 +41,7 @@ export default function OnePlaylist() {
             {ownerOptions()}
             {
                 playlist.songs?.map(song => (
-                    <SongCard song={song} key={song.id} />
+                    <SongCard song={song} key={song.id} source={"playlist"} playlistId={playlistId} />
                 ))
             }
         </div>
