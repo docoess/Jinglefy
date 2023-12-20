@@ -1,6 +1,7 @@
 const GET_ALL_PLAYLIST = 'playlist/GET_ALL_PLAYLIST'
 const GET_ONE_PLAYLIST = '/playlist/GET_ONE_PLAYLIST'
 const REMOVE_ONE_PLAYLIST = '/playlist/REMOVE_ONE_PLAYLIST'
+const ADD_SONG_TO_PLAYLIST = '/playlist/ADD_SONG_TO_PLAYLIST'
 
 
 const getAllPlaylists = (playlists) => ({
@@ -92,6 +93,26 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
         console.log(error)
         return error
     }
+}
+
+export const addSongToPlaylistThunk = (playlistId, songId) => async dispatch => {
+    const res = await fetch(`/api/playlists/${playlistId}/add-song`,
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({'songId' : songId})
+        })
+
+        if(res.ok) {
+            const data = await res.json()
+            dispatch(getOnePlaylist(data))
+        } else {
+            const error = await res.json()
+            console.log(error)
+            return error
+        }
+
+
 }
 
 

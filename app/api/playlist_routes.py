@@ -1,7 +1,7 @@
 from flask import Blueprint, request, make_response
 from flask_login import login_required, current_user
 from .aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
-from app.models import Album, Playlist,  db
+from app.models import  Playlist, Song, db
 from ..forms import PlaylistForm, UpdatePlaylistForm
 from datetime import date
 
@@ -176,8 +176,17 @@ def add_song_to_playlist(id):
 
     playlist = Playlist.query.get(id)
 
-    song_id = request
+    song_id = request.get_json()['songId']
 
-    print("REQUEST FOR ADD SONG: ", song_id)
+    song = Song.query.get(song_id)
 
-    return {"message": "still testing"}
+    playlist.playlist_songs.append(song)
+
+    print("SONGS IN PLAYLIST AFTER APPEND: ", [song.to_dict() for song in playlist.playlist_songs])
+
+    db.session.commit()
+
+    return_dict = playlist.to_dict()
+    return_dict['owner'] = current_user.to_dict()
+    return_dict['songs'] = [song.to_dict() for song in playlist.playlist_songs]
+    return return_dict
