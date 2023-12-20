@@ -1,0 +1,46 @@
+.login-modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #74A2FF;
+    background-color: #36454F ;
+    width: 300px
+}
+
+.login-modal-header {
+    font-size: 40px;
+}
+
+.login-modal-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-modal-input {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    background-color: #58019C;
+    border: 2px solid black;
+    padding: 16px;
+    border-radius: 20px;
+    width: 75%;
+    align-items: center;
+}
+
+.login-modal-input-area {
+    width: 80%
+}
+
+.login-modal-submit-button {
+    margin: 10px;
+    width: 60%;
+    height: 40px;
+    background-color: #74A2FF ;
+    color: white;
+
+    &:hover {
+        box-shadow: 2px 2px black;
+    }
+}

@@ -6,7 +6,7 @@ from alembic import op
 def seed_albums():
   album_1 = Album(
     title='Our Very First Album',
-    cover_image='https://week-20-awsbucket-dr.s3.us-west-2.amazonaws.com/7ca9def68df44cf89367b29b32549690.png',
+    cover_image='https://week-20-awsbucket-dr.s3.us-west-2.amazonaws.com/525044ffc1224575a30704999b64b6e7.png',
     desc='The debut album from new artist marnie!',
     artist_id=2,
     num_songs=2,

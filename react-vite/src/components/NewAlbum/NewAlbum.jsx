@@ -1,11 +1,14 @@
 import { useState } from "react"
 import { postAlbumThunk } from "../../redux/album"
 import { useDispatch } from "react-redux"
+import './NewAlbum.css'
+import { useNavigate } from "react-router-dom"
 
 
 
 export default function NewAlbum() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [title, setTitle] = useState("")
     const [cover, setCover] = useState(null)
     const [desc, setDesc] = useState("")
@@ -21,18 +24,20 @@ export default function NewAlbum() {
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);
-        let data = await dispatch(postAlbumThunk(formData))
-        console.log("UPLOAD COMPLETE",data)
+        let album = await dispatch(postAlbumThunk(formData))
+        console.log("UPLOAD COMPLETE",album)
+        navigate(`/albums/${album.id}`)
     }
 
     return (
-        <>
-            <h1>Create a new album!</h1>
+        <div className="new-album-container">
+            <h1 className="new-album-header">Create a new album!</h1>
             <form
             onSubmit={handleSubmit}
-            encType="multipart/form-data">
-                <label>
-                    What is the title for your album?
+            encType="multipart/form-data"
+            className="new-album-form">
+                <label className="new-album-input">
+                   <span>What is the title for your album?</span>
                     <input
                     type="text"
                     value={title}
@@ -41,27 +46,28 @@ export default function NewAlbum() {
                     required
                     />
                 </label>
-                <label>
-                    Give a brief description of your Album, it can be about whatever aspect of it that you want!
-                    <input
+                <label className="new-album-input">
+                   <span>Give a description of your Album!</span>
+                    <textarea
                     type="text"
                     value={desc}
                     placeholder="Album Description"
                     onChange={(e) => setDesc(e.target.value)}
                     required
+                    className="new-album-desc"
                     />
                 </label>
-                <label>
-                    Upload a cover image for your album!
+                <label className="new-album-input">
+                   <span>Upload a cover image for your album!</span>
                     <input
                     type="file"
                     accept="image/*"
                     onChange={(e) => setCover(e.target.files[0])}
                     />
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit" className="new-album-submit-button">Submit</button>
                 {(imageLoading)&& <p>Loading...</p>}
             </form>
-        </>
+        </div>
     )
 }

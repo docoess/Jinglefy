@@ -1,0 +1,48 @@
+.sign-up-header {
+    font-size: 40px;
+}
+
+.sign-up-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:#74A2FF
+}
+
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #74A2FF;
+    width: 100%
+}
+
+
+.sign-up-input {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    background-color: #58019C;
+    border: 2px solid black;
+    padding: 32px;
+    border-radius: 20px;
+    width: 80%;
+    align-items: center;
+}
+
+
+.sign-up-input > input::placeholder {
+    color:black
+}
+
+.sign-up-submit-button {
+
+    width: 300px;
+    height: 40px;
+    background-color: #74A2FF ;
+    color: white;
+
+    &:hover {
+        box-shadow: 2px 2px black;
+    }
+}
