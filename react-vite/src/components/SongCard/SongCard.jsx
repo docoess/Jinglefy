@@ -4,17 +4,19 @@ import { useEffect, useState } from "react";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import AddToPlaylistModal from "./AddRemovePlaylistModal/AddToPlaylistModal";
 import DeleteSongModal from "./DeleteSongModal";
+import { useNavigate } from "react-router-dom";
+import { deleteSongFromPlaylistThunk } from "../../redux/playlist";
 
-export default function SongCard({ song }) {
+export default function SongCard({ song, source, playlistId }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user)
   const likedSongs = useSelector(state => state.likes)
   const [liked, setLiked] = useState(false)
   const [numLikes, setNumLikes] = useState(song.likes)
 
-  if (likedSongs.includes(song.id) && !liked) {
-    setLiked(true)
-  }
+  console.log('LIKED SONGS', likedSongs)
+
 
   const addLike = async () => {
     setLiked(!liked);
@@ -22,11 +24,10 @@ export default function SongCard({ song }) {
   }
 
   const removeLike = async () => {
-      setLiked(!liked)
-      setNumLikes(numLikes - 1);
+    setLiked(!liked)
+    setNumLikes(numLikes - 1);
   }
-
-
+  const [deleted, setDeleted] = useState(false);
 
   useEffect(() => {
     const getAlbum = async () => {
@@ -36,16 +37,43 @@ export default function SongCard({ song }) {
     getAlbum()
   }, [dispatch, song.album_id])
 
-
-  const handleDeleteButton = async (e) => {
-    e.preventDefault()
-
-    await dispatch(deleteSongThunk(song.id));
-    console.log('HANDLE DELETE', song.id)
+  if (!Object.keys(likedSongs).length) {
+    return null
   }
 
-  console.log("SONG IN SONGCARD: ", song)
-  return (
+  if (likedSongs.includes(song.id) && !liked) {
+    setLiked(true)
+  }
+  const removeFromPlaylist = async () => {
+   const response = await dispatch(deleteSongFromPlaylistThunk(playlistId, song.id))
+   if(!response) {
+    setDeleted(true)
+   }
+  }
+
+// todo: owner auth check for delete button
+  const checkSource = () => {
+    if (source == 'album') {
+      return (
+        <>
+        <OpenModalMenuItem itemText={'Add to playlist'} modalComponent={<AddToPlaylistModal song={song} />} />
+        <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeleteSongModal />} />
+        </>
+      )
+    }
+
+    if (source == 'playlist') {
+      return (
+        <>
+        <button onClick={removeFromPlaylist}>Remove from playlist</button>
+        </>
+      )
+    }
+  }
+
+
+  console.log("deleted value: ",deleted)
+  return !deleted &&(
     <div>
       <p>{numLikes} likes</p>
       <p><span>{song.track_num}. </span><span>{song.title}</span><span><audio controls src={song.song_link}>fallback placeholder</audio></span></p>
@@ -61,11 +89,10 @@ export default function SongCard({ song }) {
 
         }
       </p>
-      <button>Like</button> <OpenModalMenuItem itemText={'Add to playlist'} modalComponent={<AddToPlaylistModal song={song} />} />
+      {/* <button>Like</button> <OpenModalMenuItem itemText={'Add to playlist'} modalComponent={<AddToPlaylistModal song={song} />} />
 
-        <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeleteSongModal />} />
-
-
+        <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeleteSongModal />} /> */}
+      {checkSource()}
     </div>
   )
 }

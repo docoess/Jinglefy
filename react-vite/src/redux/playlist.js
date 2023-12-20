@@ -115,6 +115,23 @@ export const addSongToPlaylistThunk = (playlistId, songId) => async dispatch => 
 
 }
 
+export const deleteSongFromPlaylistThunk = (playlistId, songId) => async (dispatch) => {
+    const res = await fetch(`/api/playlists/${playlistId}/remove-song`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({'songId' : songId})
+    })
+
+    if(res.ok) {
+        const data = await res.json()
+        dispatch(getOnePlaylist(data))
+    } else {
+        const error = await res.json()
+        console.log(error)
+        return error
+    }
+}
+
 
 function playlistReducer(state = {}, action) {
     switch (action.type) {
