@@ -1,7 +1,7 @@
 import { postAlbumThunk } from "../../redux/album";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './NewAlbum.css';
 
 
@@ -9,13 +9,39 @@ export default function NewAlbum() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [title, setTitle] = useState("")
-    const [cover, setCover] = useState(null)
+    const [cover, setCover] = useState('')
     const [desc, setDesc] = useState("")
     const [imageLoading, setImageLoading] = useState(false)
-    // const [errors, setErrors] = useState({})
+    const [validationErrors, setValidationErrors] = useState({})
+    const [hasSubmitted, setHasSubmitted] = useState(false)
+
+    useEffect(() => {
+        const errors = {}
+
+        if (title.length < 3) {
+            errors.title = 'Title is required and must be at least 3 characters'
+        }
+
+        if (desc.length < 10) {
+            errors.desc = 'Description needs to be at least 10 characters'
+        }
+
+        if (!cover || cover?.length < 1) {
+            errors.cover = 'An image file is required'
+        }
+
+        setValidationErrors(errors)
+    }, [title, desc, cover])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setHasSubmitted(true)
+
+        if (Object.values(validationErrors).length) {
+            return;
+        }
+
         const formData = new FormData();
         formData.append("cover_image", cover);
         formData.append("title", title)
@@ -25,6 +51,7 @@ export default function NewAlbum() {
         setImageLoading(true);
         let album = await dispatch(postAlbumThunk(formData))
         console.log("UPLOAD COMPLETE",album)
+        setHasSubmitted(false)
         navigate(`/albums/${album.id}`)
     }
 
@@ -44,6 +71,9 @@ export default function NewAlbum() {
                     onChange={(e) => setTitle(e.target.value)}
                     required
                     />
+                    {hasSubmitted && validationErrors.title && (
+                        <span className="error-message">{validationErrors.title}</span>
+                    )}
                 </label>
                 <label className="new-album-input">
                    <span>Give a description of your Album!</span>
@@ -55,6 +85,9 @@ export default function NewAlbum() {
                     onChange={(e) => setDesc(e.target.value)}
                     required
                     />
+                    {hasSubmitted && validationErrors.desc && (
+                        <span className="error-message">{validationErrors.desc}</span>
+                    )}
                 </label>
                 <label className="new-album-input">
                    <span>Upload a cover image for your album!</span>
@@ -63,6 +96,9 @@ export default function NewAlbum() {
                     accept="image/*"
                     onChange={(e) => setCover(e.target.files[0])}
                     />
+                    {hasSubmitted && validationErrors.cover && (
+                        <span className="error-message">{validationErrors.cover}</span>
+                    )}
                 </label>
                 <button className="new-album-submit-button" type="submit">Submit</button>
                 {(imageLoading)&& <p>Loading...</p>}

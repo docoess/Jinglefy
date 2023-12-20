@@ -8,5 +8,5 @@ ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
 class UpdateAlbumForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    cover_image = FileField("Cover Image", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    cover_image = FileField("Cover Image", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     description = StringField("Description")
