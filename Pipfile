@@ -24,7 +24,6 @@ mako = "==1.2.4"
 markupsafe = "==2.1.2"
 sqlalchemy = "==1.4.46"
 werkzeug = "==2.2.2"
-wtforms = "==3.0.1"
 boto3 = "==1.33.13"
 botocore = "==1.33.13"
 importlib-metadata = "==7.0.0"
@@ -32,6 +31,7 @@ jmespath = "==1.0.1"
 s3transfer = "==0.8.2"
 urllib3 = "==1.26.18"
 zipp = "==3.17.0"
+wtforms = {extras = ["email"], version = "2.1.0.post1"}
 
 [dev-packages]
 

@@ -39,8 +39,8 @@
     position: relative;
     outline: none;
     content: "Upload File";
-    
-    
+
+
     /* File Selector Button Styles */
     &::file-selector-button {
       border-radius: 4px;
@@ -74,4 +74,10 @@
     &:hover {
         box-shadow: 2px 2px black;
     }
+}
+
+.error-message {
+    color: #d5510f;
+    margin-top: 8px;
+    font-weight: bold;
 }
