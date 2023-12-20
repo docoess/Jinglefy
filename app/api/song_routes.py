@@ -142,3 +142,14 @@ def like_song(id):
   song = Song.query.get(id)
 
   song.song_likes.append(current_user)
+
+  db.session.commit()
+
+  return [song.id for song in current_user.liked_songs]
+
+@song_routes.route('/<int:id>/unlike', methods=['PATCH'])
+@login_required
+def unlike_song(id):
+  """
+  Unlikes a song by id
+  """
