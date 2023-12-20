@@ -13,8 +13,20 @@ export default function UpdatePlaylist() {
     const [title, setTitle] = useState(playlist?.title)
     const [cover, setCover] = useState(playlist?.cover_image)
     const [imageLoading, setImageLoading] = useState(false)
-    // const [errors, setErrors] = useState({})
+    const [validationErrors, setValidationErrors] = useState({})
+    const [hasSubmitted, setHasSubmitted] = useState(false)
 
+
+    useEffect(() => { 
+        const errors = {}
+        if (title.length < 3) {
+            errors.title = 'Title is required and must be at least 3 characters'
+        }
+        if (!cover || cover?.length < 1) {
+            errors.cover = 'An image file is required'
+        }
+        setValidationErrors(errors)
+    },[title,cover])
 
     useEffect(() => { 
 
@@ -22,8 +34,19 @@ export default function UpdatePlaylist() {
 
     },[dispatch,playlistId])
 
+
+ 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setHasSubmitted(true)
+
+
+        if (Object.values(validationErrors).length) {
+            return;
+        }
+        
         const formData = new FormData();
 
         formData.append("cover_image", cover);
@@ -52,6 +75,9 @@ export default function UpdatePlaylist() {
                     onChange={(e) => setTitle(e.target.value)}
                     required
                     />
+                        {hasSubmitted && validationErrors.title && (
+                        <span className="error-message">{validationErrors.title}</span>
+                    )}
                 </label>
                 <label>
                     Upload a cover image for your playlist!
@@ -60,6 +86,9 @@ export default function UpdatePlaylist() {
                     accept="image/*"
                     onChange={(e) => setCover(e.target.files[0])}
                     />
+                       {hasSubmitted && validationErrors.cover && (
+                        <span className="error-message">{validationErrors.cover}</span>
+                    )}
                 </label>
                 <button type="submit">Submit</button>
                 {(imageLoading)&& <p>Loading...</p>}
