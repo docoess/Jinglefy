@@ -1,14 +1,14 @@
-import { useModal } from "../../context/Modal"
+import { useModal } from "../../context/Modal";
 
 
 export default function DeleteSongModal() {
-    const {history} = useHistory()
-// todo: ASK about why { closeModal } = useModal(); throws an error 
+    // const {history} = useHistory()
+    const { closeModal } = useModal();
     // const modalInvoked = useModal();
     // let closeModal = modalInvoked.closeModal
 
     let close = function(){
-        history.push('/albums')
+        closeModal()
     }
 
     return (
