@@ -190,3 +190,27 @@ def add_song_to_playlist(id):
     return_dict['owner'] = current_user.to_dict()
     return_dict['songs'] = [song.to_dict() for song in playlist.playlist_songs]
     return return_dict
+
+
+@playlist_routes.route('/<int:id>/remove-song', methods=['PATCH'])
+@login_required
+def remove_song_from_playlist(id):
+
+    
+    playlist = Playlist.query.get(id)
+
+    song_id = request.get_json()['songId']
+
+    song = Song.query.get(song_id)
+
+    print("BEFORE: ", [song.to_dict() for song in playlist.playlist_songs])
+    playlist.playlist_songs.remove(song)
+
+    print("AFTER: ", [song.to_dict() for song in playlist.playlist_songs])
+
+    db.session.commit()
+
+    return_dict = playlist.to_dict()
+    return_dict['owner'] = current_user.to_dict()
+    return_dict['songs'] = [song.to_dict() for song in playlist.playlist_songs]
+    return return_dict
