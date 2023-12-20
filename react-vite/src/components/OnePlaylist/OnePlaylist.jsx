@@ -1,4 +1,5 @@
 import UpdatePlaylist from "./OptionButtons/UpdatePlaylist";
+import DeletePlaylist from "./OptionButtons/DeletePlaylist"
 import { onePlaylistThunk } from "../../redux/playlist";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -17,7 +18,7 @@ export default function OnePlaylist() {
             if(playlist.owner_id == currentUser.id) {
                 return <div>
                     <UpdatePlaylist />
-                    {/* <DeletePlaylist /> */}
+                    <DeletePlaylist />
                 </div>
             }
         }
@@ -26,7 +27,7 @@ export default function OnePlaylist() {
 
     useEffect(() => {
         const getPlaylists = async () => {
-           setErrors(await dispatch(onePlaylistThunk(playlistId))) 
+           setErrors(await dispatch(onePlaylistThunk(playlistId)))
         }
 
         getPlaylists()
