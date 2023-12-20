@@ -1,11 +1,20 @@
+import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { deleteSongThunk, oneAlbumThunk } from "../../redux/album";
 
-
-export default function DeleteSongModal() {
-    // const {history} = useHistory()
+export default function DeleteSongModal({song}) {
+    const dispatch = useDispatch()
     const { closeModal } = useModal();
-    // const modalInvoked = useModal();
-    // let closeModal = modalInvoked.closeModal
+    
+
+
+    const handleConfirm = async () => { 
+        const albumID = song.album_id
+       await dispatch(deleteSongThunk(song.id))
+       await dispatch(oneAlbumThunk(albumID))
+       
+       closeModal()
+    }
 
     let close = function(){
         closeModal()
@@ -14,7 +23,7 @@ export default function DeleteSongModal() {
     return (
         <div>
             <h1>Are you sure you want to delete this song?</h1>
-            <button>Yes</button>
+            <button onClick={handleConfirm}>Yes</button>
             <button onClick={close}>No</button>
         </div>
     )
