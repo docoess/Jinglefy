@@ -1,20 +1,18 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom";
-import { allAlbumsThunk, deleteAlbumThunk } from "../../../redux/album";
+import { deletePlaylistThunk } from "../../../redux/album";
 
+//todo: still needs work
 export default function DeleteAlbum ()  { 
   const navigate = useNavigate();
     const dispatch = useDispatch()
-    const {albumId} = useParams()
+    const {playlistId} = useParams()
     const user = useSelector(state => state.session.user)
     const album = useSelector(state => state.albums[albumId])
 
     const handleSubmit = async () => {
-        await dispatch(deleteAlbumThunk(albumId))
-        // await dispatch(allAlbumsThunk())
+        await dispatch(deletePlaylistThunk(playlistId))
         // navigate('/albums')
-        
-        navigate(`/albums`)
     }
     
 
