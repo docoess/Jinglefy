@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { postSongThunk, oneAlbumThunk } from "../../redux/album";
+import './CreateSongForm.css'
 
 export default function CreateSongForm() {
   const [title, setTitle] = useState('')
@@ -9,6 +10,7 @@ export default function CreateSongForm() {
   const [audioLoading, setAudioLoading] = useState(false)
   const dispatch = useDispatch()
   const { albumId } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getAlbum = async () => {
@@ -30,17 +32,20 @@ export default function CreateSongForm() {
     setAudioLoading(true);
     let data = await dispatch(postSongThunk(formData, albumId))
     console.log("UPLOAD COMPLETE",data)
+    navigate(`/albums/${albumId}`)
   }
 
   return (
-    <>
+    <div className="new-song-container">
       <h1>Add a new song!</h1>
       <form
       onSubmit={handleSubmit}
-      encType="multipart/form-data">
-        <label>
-          What is the song title?
-          <input
+      encType="multipart/form-data"
+      className="new-song-form"
+      >
+        <label className="new-song-input">
+          <h3 className="h4-text">What is the song title?</h3>
+          <input className="inner-input"
           type="text"
           value={title}
           placeholder="Song Title"
@@ -48,16 +53,16 @@ export default function CreateSongForm() {
           required
           />
         </label>
-        <label>
-          Upload your song file!
-          <input
+        <label className="new-song-input">
+          <h3 className="h4-text">Upload your song file!</h3>
+          <input className="inner-input"
           type="file"
           accept=".wav,.ogg,.mp3"
           onChange={(e) => setSong(e.target.files[0])}
           />
         </label>
-        <button>Submit</button>
+        <button className="new-song-submit-button">Submit</button>
       </form>
-    </>
+    </div>
   )
 }

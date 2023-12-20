@@ -13,6 +13,8 @@ export default function DeleteAlbum ()  {
         await dispatch(deleteAlbumThunk(albumId))
         // await dispatch(allAlbumsThunk())
         // navigate('/albums')
+        
+        navigate(`/albums`)
     }
     
 

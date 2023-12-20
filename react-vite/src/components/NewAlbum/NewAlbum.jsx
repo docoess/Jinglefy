@@ -2,11 +2,13 @@ import { useState } from "react"
 import { postAlbumThunk } from "../../redux/album"
 import { useDispatch } from "react-redux"
 import './NewAlbum.css'
+import { useNavigate } from "react-router-dom"
 
 
 
 export default function NewAlbum() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [title, setTitle] = useState("")
     const [cover, setCover] = useState(null)
     const [desc, setDesc] = useState("")
@@ -22,8 +24,9 @@ export default function NewAlbum() {
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);
-        let data = await dispatch(postAlbumThunk(formData))
-        console.log("UPLOAD COMPLETE",data)
+        let album = await dispatch(postAlbumThunk(formData))
+        console.log("UPLOAD COMPLETE",album)
+        navigate(`/albums/${album.id}`)
     }
 
     return (
