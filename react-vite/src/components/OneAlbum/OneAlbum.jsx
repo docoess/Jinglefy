@@ -56,7 +56,6 @@ export default function OneAlbum() {
         }
 
         getAlbums()
-        // navigate(`/albums/${albumId}`)
     }, [dispatch, albumId])
 
 
@@ -71,7 +70,7 @@ export default function OneAlbum() {
             {ownerOptions()}
             {
                 songs?.map(song => (
-                    <SongCard song={song} key={song.id} />
+                    <SongCard song={song} key={song.id} source={"album"} />
                 ))
             }
         </div>
