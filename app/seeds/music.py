@@ -59,7 +59,8 @@ def seed_songs():
     title='Bacon And Eggs',
     album_id=2,
     track_num=1,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/5b8ce15b7d5049cda136429b4b8e7e85.mp3'
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/5b8ce15b7d5049cda136429b4b8e7e85.mp3',
+    song_likes=[users[0], users[1], users[2]]
   )
 
   song_4 = Song(
@@ -73,14 +74,16 @@ def seed_songs():
     title='T-Rex Ice Cubes',
     album_id=3,
     track_num=1,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/a5e8a358625c4968bcc7320bc128c783.mp3'
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/a5e8a358625c4968bcc7320bc128c783.mp3',
+    song_likes=[users[1], users[2]]
   )
 
   song_6 = Song(
     title='Orange Juice And Napkins',
     album_id=3,
     track_num=2,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/b97a7bedde0941f3bf9822d593c01b84.mp3'
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/b97a7bedde0941f3bf9822d593c01b84.mp3',
+    song_likes=[users[0], users[1], users[2]]
   )
 
   song_7 = Song(
@@ -101,14 +104,16 @@ def seed_songs():
     title='Moonrise On Jupiter',
     album_id=3,
     track_num=5,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/ed9dbc6489d24efaa79108c419bddb5c.mp3'
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/ed9dbc6489d24efaa79108c419bddb5c.mp3',
+    song_likes=[users[0], users[1]]
   )
 
   song_10 = Song(
     title='Candlelit Freefall',
     album_id=3,
     track_num=6,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/f30b4a29cf624857bce6a5e2bacd5582.mp3'
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/f30b4a29cf624857bce6a5e2bacd5582.mp3',
+    song_likes=[users[0], users[2]]
   )
 
   db.session.add(song_1)
@@ -133,7 +138,15 @@ def seed_playlists():
     playlist_songs=[songs[2], songs[3], songs[6]]
   )
 
+  playlist_2 = Playlist(
+    title='Demo User Playlist',
+    owner_id=1,
+    cover_img='https://week-20-awsbucket-dr.s3.us-west-2.amazonaws.com/bd9d9a163e7043fc886fb39aff71ee88.jpg',
+    playlist_songs=[songs[1], songs[4], songs[5], songs[6], songs[7]]
+  )
+
   db.session.add(playlist_1)
+  db.session.add(playlist_2)
   db.session.commit()
 
 def undo_albums():

@@ -35,7 +35,8 @@ class Song(db.Model):
             "title": self.title,
             "album_id": self.album_id,
             "track_num": self.track_num,
-            "song_link": self.song_link
+            "song_link": self.song_link,
+            "likes": len(self.song_likes)
         }
 
         if printer:

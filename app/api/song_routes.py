@@ -131,3 +131,14 @@ def delete_song(id):
     remove_file_from_s3(old_url, filetype='audio')
 
     return {"message": "Successfully Deleted"}
+
+@song_routes.route('/<int:id>/like', methods=['POST'])
+@login_required
+def like_song(id):
+  """
+  Likes a song by id
+  """
+
+  song = Song.query.get(id)
+
+  song.song_likes.append(current_user)
