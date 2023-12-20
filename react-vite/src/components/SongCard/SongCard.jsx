@@ -6,6 +6,7 @@ import AddToPlaylistModal from "./AddRemovePlaylistModal/AddToPlaylistModal";
 import DeleteSongModal from "./DeleteSongModal";
 import { useNavigate } from "react-router-dom";
 import { deleteSongFromPlaylistThunk } from "../../redux/playlist";
+import { addLikeThunk, removeLikeThunk } from "../../redux/likes";
 
 export default function SongCard({ song, source, playlistId }) {
   const navigate = useNavigate();
@@ -15,15 +16,14 @@ export default function SongCard({ song, source, playlistId }) {
   const [liked, setLiked] = useState(false)
   const [numLikes, setNumLikes] = useState(song.likes)
 
-  console.log('LIKED SONGS', likedSongs)
-
-
   const addLike = async () => {
+    await dispatch(addLikeThunk(song.id))
     setLiked(!liked);
     setNumLikes(numLikes + 1);
   }
 
   const removeLike = async () => {
+    await dispatch(removeLikeThunk(song.id))
     setLiked(!liked)
     setNumLikes(numLikes - 1);
   }
