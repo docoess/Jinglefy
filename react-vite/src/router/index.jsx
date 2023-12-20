@@ -8,6 +8,10 @@ import NewAlbum from '../components/NewAlbum/NewAlbum';
 import LandingPage from '../components/LandingPage/LandingPage';
 import UpdateAlbums from '../components/UpdateAlbums/UpdateAlbums';
 import CreateSongForm from '../components/CreateSongForm/CreateSongForm';
+import AllPlaylists from '../components/AllPlaylists/AllPlaylists';
+import OnePlaylist from '../components/OnePlaylist/OnePlaylist';
+import CreatePlaylistPage from '../components/CreatePlaylistPage/CreatePlaylistPage';
+import UpdatePlaylist from '../components/UpdatePlaylist/UpdatePlaylist';
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +48,22 @@ export const router = createBrowserRouter([
       {
         path: "albums/:albumId/new-song",
         element: <CreateSongForm />
+      },
+      {
+        path: "playlists",
+        element: <AllPlaylists />
+      },
+      {
+        path: "playlists/:playlistId",
+        element: <OnePlaylist />
+      }, 
+      {
+        path: "playlists/new",
+        element: <CreatePlaylistPage />
+      }, 
+      {
+        path: "playlists/:playlistId/update",
+        element: <UpdatePlaylist />
       }
     ],
   },
