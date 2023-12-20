@@ -1,4 +1,4 @@
-import jinglefyLogo from "../../jinglefy-high-resolution-logo-transparent.png"
+import jinglefyLogo from "../../jinglefy-high-resolution-logo-transparent.png";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import ProfileButton from "./ProfileButton";
