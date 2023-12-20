@@ -11,8 +11,8 @@ export default function DeleteAlbum ()  {
 
     const handleSubmit = async () => {
         await dispatch(deleteAlbumThunk(albumId))
-        await dispatch(allAlbumsThunk())
-        // navigate('/albums')
+        
+        navigate(`/albums`)
     }
     
 

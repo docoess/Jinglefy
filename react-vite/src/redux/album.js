@@ -88,6 +88,7 @@ export const postAlbumThunk = (formData) => async dispatch => {
         const album = await res.json();
         dispatch(postAlbum(album))
         console.log('post album thunk',album)
+        return album
     } else {
         const album = await res.json()
         console.log('post,thunk',album)

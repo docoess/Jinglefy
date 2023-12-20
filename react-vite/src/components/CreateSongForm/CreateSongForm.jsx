@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { postSongThunk, oneAlbumThunk } from "../../redux/album";
 import './CreateSongForm.css'
 
@@ -10,6 +10,7 @@ export default function CreateSongForm() {
   const [audioLoading, setAudioLoading] = useState(false)
   const dispatch = useDispatch()
   const { albumId } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getAlbum = async () => {
@@ -31,6 +32,7 @@ export default function CreateSongForm() {
     setAudioLoading(true);
     let data = await dispatch(postSongThunk(formData, albumId))
     console.log("UPLOAD COMPLETE",data)
+    navigate(`/albums/${albumId}`)
   }
 
   return (
