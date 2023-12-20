@@ -18,9 +18,9 @@ export default function AlbumCard({ album }) {
        return redirect(`${album.id}`)
     }
     return (
-       <div onClick={onClick} className="album-card">
+       <div className="album-card" onClick={onClick}>
             <p className="album-card-title">{album.title}</p>
-            <img src={album.cover_image} className="album-card-image"/>
+            <img className="album-card-image" src={album.cover_image}/>
             <p className="album-card-num-songs">{album.num_songs} Songs</p>
             <p className="album-card-release-date">Released on {formattedDate(album.release_date)}</p>
         </div>

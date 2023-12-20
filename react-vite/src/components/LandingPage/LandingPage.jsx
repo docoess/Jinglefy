@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom"
-import "../AllAlbums/AllAlbums.css"
+import { NavLink } from "react-router-dom";
+import "../AllAlbums/AllAlbums.css";
+
 export default function LandingPage() {
     return (
         <>

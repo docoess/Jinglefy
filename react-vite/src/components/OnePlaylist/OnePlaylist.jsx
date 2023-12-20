@@ -1,26 +1,13 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
+import UpdatePlaylist from "./OptionButtons/UpdatePlaylist";
 import { onePlaylistThunk } from "../../redux/playlist";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import SongCard from "../SongCard/SongCard";
-import UpdatePlaylist from "./OptionButtons/UpdatePlaylist"
-
-const formattedDate = (date) => {
-    const d = new Date(date);
-    const cd = (num) => num.toString().padStart(2, 0);
-    return (
-        d.getFullYear() +
-        "-" +
-        cd(d.getMonth() + 1) +
-        "-" +
-        cd(d.getDate())
-    );
-};
 
 export default function OnePlaylist() {
     const dispatch = useDispatch();
-
-    let { playlistId } = useParams()
+    let { playlistId } = useParams();
     const playlist = useSelector((state) => state.playlists[playlistId]);
     const currentUser = useSelector((state) => state.session.user)
     const [errors, setErrors] = useState(null)
@@ -44,11 +31,11 @@ export default function OnePlaylist() {
 
         getPlaylists()
     }, [dispatch, playlistId])
-    console.log(playlist)
+
     return playlist && (
         <div>
             <p>Title: {playlist.title}</p>
-            <img src={playlist.cover_image}/>
+            <img src={playlist.cover_img}/>
             <p>Number of Songs: {playlist.songs ? playlist.songs.length: null}</p>
             {ownerOptions()}
             {
