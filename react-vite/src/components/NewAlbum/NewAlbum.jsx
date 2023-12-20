@@ -1,9 +1,8 @@
-import { useState } from "react"
-import { postAlbumThunk } from "../../redux/album"
-import { useDispatch } from "react-redux"
-import './NewAlbum.css'
-import { useNavigate } from "react-router-dom"
-
+import { postAlbumThunk } from "../../redux/album";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import './NewAlbum.css';
 
 
 export default function NewAlbum() {
@@ -13,7 +12,7 @@ export default function NewAlbum() {
     const [cover, setCover] = useState(null)
     const [desc, setDesc] = useState("")
     const [imageLoading, setImageLoading] = useState(false)
-    const [errors, setErrors] = useState({})
+    // const [errors, setErrors] = useState({})
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,9 +32,9 @@ export default function NewAlbum() {
         <div className="new-album-container">
             <h1 className="new-album-header">Create a new album!</h1>
             <form
+            className="new-album-form"
             onSubmit={handleSubmit}
-            encType="multipart/form-data"
-            className="new-album-form">
+            encType="multipart/form-data">
                 <label className="new-album-input">
                    <span>What is the title for your album?</span>
                     <input
@@ -49,12 +48,12 @@ export default function NewAlbum() {
                 <label className="new-album-input">
                    <span>Give a description of your Album!</span>
                     <textarea
+                    className="new-album-desc"
                     type="text"
                     value={desc}
                     placeholder="Album Description"
                     onChange={(e) => setDesc(e.target.value)}
                     required
-                    className="new-album-desc"
                     />
                 </label>
                 <label className="new-album-input">
@@ -65,7 +64,7 @@ export default function NewAlbum() {
                     onChange={(e) => setCover(e.target.files[0])}
                     />
                 </label>
-                <button type="submit" className="new-album-submit-button">Submit</button>
+                <button className="new-album-submit-button" type="submit">Submit</button>
                 {(imageLoading)&& <p>Loading...</p>}
             </form>
         </div>

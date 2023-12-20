@@ -1,21 +1,14 @@
-import { useEffect, useState } from "react"
-import { onePlaylistThunk, updatePlaylistThunk } from "../../redux/playlist"
-import { useDispatch, useSelector } from "react-redux"
-import { useParams} from 'react-router-dom'
-
-//todo: we should grab id of the album and useparams and match it 
-//todo: we should useselector with id and get album details 
-//todo: we should pass attributes to our useState
-//todo: dispatch our updated album and then hadnle store
+import { useEffect, useState } from "react";
+import { onePlaylistThunk, updatePlaylistThunk } from "../../redux/playlist";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams} from 'react-router-dom';
 
 
 export default function UpdatePlaylist() {
-    const dispatch = useDispatch()
-
-    const { playlistId } = useParams()
+    const dispatch = useDispatch();
+    const { playlistId } = useParams();
 
     const playlist = useSelector(state => state.playlists[playlistId])
-    console.log('updatedalsjdaadsdo',playlist)
 
     const [title, setTitle] = useState(playlist?.title)
     const [cover, setCover] = useState(playlist?.cover_image)
@@ -35,7 +28,6 @@ export default function UpdatePlaylist() {
 
         formData.append("cover_image", cover);
         formData.append("title", title)
-        console.log('formdata dataq in react',formData)
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);

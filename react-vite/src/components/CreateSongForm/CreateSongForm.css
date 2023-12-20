@@ -5,12 +5,12 @@
     color: #74A2FF
 }
 
-
 .new-song-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .new-song-input {
     display: flex;
     flex-direction: column;
@@ -44,10 +44,7 @@
       width: 132px;
       /* color: transparent; */
     }
-  }
-
-
-
+}
 
 .new-song-submit-button {
     width: 300px;
@@ -59,7 +56,6 @@
         box-shadow: 2px 2px black;
     }
 }
-
 
 .inner-input {
     padding: 4px;

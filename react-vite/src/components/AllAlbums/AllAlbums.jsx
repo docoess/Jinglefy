@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import { allAlbumsThunk } from "../../redux/album";
+import { useEffect, useState } from "react";
 import AlbumCard from "./AlbumCard";
+
+// todo: Refresh error after delete
 
 export default function AllAlbums() {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState(null)
     const allAlbums = useSelector(state => Object.values(state.albums))
-    console.log("albums:",allAlbums)
+    // console.log("allAlbums: ", allAlbums)
 
     useEffect(() => {
         const getAlbums = async () => {

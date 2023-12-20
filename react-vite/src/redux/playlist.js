@@ -39,6 +39,7 @@ export const onePlaylistThunk = (playlistId) => async (dispatch) => {
     }
 }
 
+
 export const postPlaylistThunk = (formData) => async (dispatch) => {
     const res = await fetch('/api/playlists/new', {
         method: 'POST',
@@ -54,6 +55,7 @@ export const postPlaylistThunk = (formData) => async (dispatch) => {
         return error
     }
 }
+
 
 export const updatePlaylistThunk = (playlistId, formData) => async (dispatch) => {
     const res = await fetch(`/api/playlists/${playlistId}/update`, {
@@ -76,7 +78,6 @@ function playlistReducer(state = {}, action) {
     switch (action.type) {
         case GET_ALL_PLAYLIST: {
             const newState = {...state}
-            console.log('REDUCER: ',action.payload)
             action.payload.forEach(playlist => {
                 newState[playlist.id] = playlist
             });

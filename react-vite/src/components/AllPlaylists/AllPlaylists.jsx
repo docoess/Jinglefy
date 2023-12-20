@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
 import { allPlaylistsThunk } from "../../redux/playlist";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import PlaylistCard from "./PlaylistCard";
 
-//todo: add playlist button
+//todo: add create playlist button
+
 export default function AllPlaylists() {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState(null)
     const allPlaylists = useSelector(state => Object.values(state.playlists))
-    console.log("playlist:",allPlaylists)
+    // console.log("allPlaylist: ",allPlaylists)
 
     useEffect(() => {
         const getPlaylists = async () => {

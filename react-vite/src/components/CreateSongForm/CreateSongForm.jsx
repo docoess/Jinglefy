@@ -1,8 +1,8 @@
+import { postSongThunk, oneAlbumThunk } from "../../redux/album";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { postSongThunk, oneAlbumThunk } from "../../redux/album";
-import './CreateSongForm.css'
+import './CreateSongForm.css';
 
 export default function CreateSongForm() {
   const [title, setTitle] = useState('')
@@ -38,14 +38,15 @@ export default function CreateSongForm() {
   return (
     <div className="new-song-container">
       <h1>Add a new song!</h1>
-      <form
+      <form 
+      className="new-song-form"
       onSubmit={handleSubmit}
       encType="multipart/form-data"
-      className="new-song-form"
       >
         <label className="new-song-input">
           <h3 className="h4-text">What is the song title?</h3>
-          <input className="inner-input"
+          <input 
+          className="inner-input"
           type="text"
           value={title}
           placeholder="Song Title"
@@ -55,7 +56,8 @@ export default function CreateSongForm() {
         </label>
         <label className="new-song-input">
           <h3 className="h4-text">Upload your song file!</h3>
-          <input className="inner-input"
+          <input 
+          className="inner-input"
           type="file"
           accept=".wav,.ogg,.mp3"
           onChange={(e) => setSong(e.target.files[0])}
