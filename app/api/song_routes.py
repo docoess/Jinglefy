@@ -2,7 +2,7 @@ from flask import Blueprint, request, make_response
 from flask_login import login_required, current_user
 from .aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 from app.models import Album, db, Song
-from ..forms import SongForm, SongUpdateForm
+from ..forms import SongForm
 
 song_routes = Blueprint('song', __name__)
 
@@ -63,47 +63,50 @@ def create_song():
     print(form.errors)
     return form.errors
 
-@song_routes.route('/<int:id>/update', methods=['PUT'])
-@login_required
-def update_song(id):
-  """
-  Update a song by id
-  """
-  song = Song.query.get(id)
+# COMMENTED OUT AS WE ARE NO LONGER UPDATING SONGS
+  # LEFT CODE FOR FUTURE REFERENCE
 
-  owner_id = song.album.artist_id
+# @song_routes.route('/<int:id>/update', methods=['PUT'])
+# @login_required
+# def update_song(id):
+#   """
+#   Update a song by id
+#   """
+#   song = Song.query.get(id)
 
-  if current_user.id != owner_id:
-    response = make_response({ "errors": { "message": "forbidden"} }, 401)
-    return response
+#   owner_id = song.album.artist_id
 
-  else:
-    form = SongUpdateForm()
+#   if current_user.id != owner_id:
+#     response = make_response({ "errors": { "message": "forbidden"} }, 401)
+#     return response
 
-    form["csrf_token"].data = request.cookies["csrf_token"]
+#   else:
+#     form = SongUpdateForm()
 
-    if form.validate_on_submit():
-      if form.data['title']:
-        song.title = form.data['title']
-      if form.data['song_file']:
-        old_url = song.song_link
-        song_file = form.data["song_file"]
-        song_file.filename = get_unique_filename(song_file.filename)
-        upload = upload_file_to_s3(song_file, filetype='audio')
+#     form["csrf_token"].data = request.cookies["csrf_token"]
 
-        if "url" not in upload:
-          return upload
+#     if form.validate_on_submit():
+#       if form.data['title']:
+#         song.title = form.data['title']
+#       if form.data['song_file']:
+#         old_url = song.song_link
+#         song_file = form.data["song_file"]
+#         song_file.filename = get_unique_filename(song_file.filename)
+#         upload = upload_file_to_s3(song_file, filetype='audio')
 
-        remove_file_from_s3(old_url, filetype='audio')
+#         if "url" not in upload:
+#           return upload
 
-        song.song_link = upload['url']
+#         remove_file_from_s3(old_url, filetype='audio')
 
-      db.session.commit()
-      return song.to_dict()
+#         song.song_link = upload['url']
 
-    else:
-      print(form.errors)
-      return form.errors
+#       db.session.commit()
+#       return song.to_dict()
+
+#     else:
+#       print(form.errors)
+#       return form.errors
 
 @song_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required

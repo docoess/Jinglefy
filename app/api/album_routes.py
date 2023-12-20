@@ -109,23 +109,23 @@ def update_album(id):
 
     if form.validate_on_submit():
         album = Album.query.get(id)
-        print('albumsssssssssss',album)
         old_url = album.cover_image
         cover_image = form.data["cover_image"]
-        cover_image.filename = get_unique_filename(cover_image.filename)
-        upload = upload_file_to_s3(cover_image, filetype="image")
-        print("UPLOAD FROM CREATE ALBUM ROUTE: ", upload)
+        if not isinstance(cover_image, str):
+            cover_image.filename = get_unique_filename(cover_image.filename)
+            upload = upload_file_to_s3(cover_image, filetype="image")
+            print("UPLOAD FROM CREATE ALBUM ROUTE: ", upload)
 
-        if "url" not in upload:
-         # if the dictionary doesn't have a url key
-        # it means that there was an error when you tried to upload
-        # so you send back that error message (and you printed it above)
-            return upload
-        
-        remove_file_from_s3(old_url,filetype='image')
+            if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when you tried to upload
+            # so you send back that error message (and you printed it above)
+                return upload
+
+            remove_file_from_s3(old_url,filetype='image')
+            album.cover_image = upload["url"]
 
         album.title = form.data["title"]
-        album.cover_image = upload["url"]
         album.desc = form.data["description"]
 
         db.session.commit()

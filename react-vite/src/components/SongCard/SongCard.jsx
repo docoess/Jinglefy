@@ -27,11 +27,11 @@ export default function SongCard({ song }) {
   return (
     <div>
       <p><span>{song.track_num}. </span><span>{song.title}</span><span><audio controls src={song.song_link}>fallback placeholder</audio></span></p>
-      <p><button>Like</button> <button>Add to Playlist</button>
+      <p><button>Like</button> <button>Add to Playlist</button></p>
 
         <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeleteSongModal />} />
 
-       </p>
+
     </div>
   )
 }

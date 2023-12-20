@@ -14,16 +14,38 @@ export default function NewAlbum() {
     const [cover, setCover] = useState(album?.cover_image)
     const [desc, setDesc] = useState(album?.desc)
     const [imageLoading, setImageLoading] = useState(false)
-    // const [errors, setErrors] = useState({})
+    const [validationErrors, setValidationErrors] = useState({})
+    const [hasSubmitted, setHasSubmitted] = useState(false)
 
 
-    useEffect(() => { 
+    useEffect(() => {
         dispatch(oneAlbumThunk(albumId))
 
     },[dispatch,albumId])
 
+    useEffect(() => {
+        const errors = {}
+
+        if (title.length < 3) {
+            errors.title = 'Title is required and must be at least 3 characters'
+        }
+
+        if (desc.length < 10) {
+            errors.desc = 'Description needs to be at least 10 characters'
+        }
+
+        setValidationErrors(errors)
+    }, [title, desc])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setHasSubmitted(true)
+
+        if (Object.values(validationErrors).length) {
+            return;
+        }
+
         const formData = new FormData();
 
         formData.append("cover_image", cover);
@@ -32,9 +54,10 @@ export default function NewAlbum() {
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);
-        let data = await dispatch(updateALbumThunk(albumId,formData))
+        console.log('COVER', cover)
+        await dispatch(updateALbumThunk(albumId,formData))
+        setHasSubmitted(false)
         navigate(`/albums/${albumId}`)
-        console.log("UPLOAD COMPLETE",data)
     }
 
     return (
@@ -54,6 +77,9 @@ export default function NewAlbum() {
                     onChange={(e) => setTitle(e.target.value)}
                     required
                     />
+                    {hasSubmitted && validationErrors.title && (
+                        <span className="error-message">{validationErrors.title}</span>
+                    )}
                 </label>
                 <label className="new-album-input">
                     Give a brief description of your Album
@@ -65,6 +91,9 @@ export default function NewAlbum() {
                     onChange={(e) => setDesc(e.target.value)}
                     required
                     />
+                    {hasSubmitted && validationErrors.desc && (
+                        <span className="error-message">{validationErrors.desc}</span>
+                    )}
                 </label>
                 <label className="new-album-input">
                     Upload a cover image for your album!
