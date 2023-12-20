@@ -30,9 +30,9 @@ export default function AddToPlaylistModal({ song }) {
                 {
                     playlists && Object.keys(playlists).length ? (
                         <select onChange={e => setTargetPlaylist(e.target.value)}>
-                            <option value="" disabled selected>Select your option</option>
+                            <option value="" disabled selected key="0">Select your option</option>
                             {Object.values(playlists).map(playlist => (
-                                <option value={playlist.id}>{playlist.title}</option>
+                                <option value={playlist.id}>{playlist.title} key={playlist.id}</option>
                             ))}
                         </select>
                     ) : <p>No playlists yet!</p>
