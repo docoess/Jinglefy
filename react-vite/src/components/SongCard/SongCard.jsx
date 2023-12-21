@@ -57,7 +57,7 @@ export default function SongCard({ song, source, playlistId }) {
       return (
         <>
         <OpenModalMenuItem itemText={'Add to playlist'} modalComponent={<AddToPlaylistModal song={song} />} />
-        <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeleteSongModal />} />
+        <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeleteSongModal song={song}/>} />
         </>
       )
     }
