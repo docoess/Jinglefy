@@ -72,7 +72,7 @@ export default function NewAlbum() {
                     required
                     />
                     {hasSubmitted && validationErrors.title && (
-                        <span className="error-message">{validationErrors.title}</span>
+                        <span className="error">{validationErrors.title}</span>
                     )}
                 </label>
                 <label className="new-album-input">
@@ -86,7 +86,7 @@ export default function NewAlbum() {
                     required
                     />
                     {hasSubmitted && validationErrors.desc && (
-                        <span className="error-message">{validationErrors.desc}</span>
+                        <span className="error">{validationErrors.desc}</span>
                     )}
                 </label>
                 <label className="new-album-input">
@@ -97,7 +97,7 @@ export default function NewAlbum() {
                     onChange={(e) => setCover(e.target.files[0])}
                     />
                     {hasSubmitted && validationErrors.cover && (
-                        <span className="error-message">{validationErrors.cover}</span>
+                        <span className="error">{validationErrors.cover}</span>
                     )}
                 </label>
                 <button className="new-album-submit-button" type="submit">Submit</button>
