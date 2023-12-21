@@ -26,7 +26,7 @@ export default function AddToPlaylistModal({ song }) {
 
     return playlists && (
         <div>
-            <h1>What playlist would you like to add "{ song.title }" to?</h1>
+            <h1>What playlist would you like to add &quot;{ song.title }&quot; to?</h1>
             <form onSubmit={handleSubmit}>
                 {
                     playlists && Object.keys(playlists).length ? (
