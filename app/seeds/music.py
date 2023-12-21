@@ -24,7 +24,7 @@ def seed_albums():
 
   album_3 = Album(
     title='Trilobytes and Megabytes',
-    cover_image='https://week-20-awsbucket-dr.s3.us-west-2.amazonaws.com/caa870bb13b946c487bcde0d69eb899b.png',
+    cover_image='https://week-20-awsbucket-dr.s3.us-west-2.amazonaws.com/70c1dc9c0fc2425b88d111d79d751ea5.png',
     desc='The newest album from conceptual artist bobbie. A tale of dinosaurs and computers.',
     artist_id=3,
     num_songs=6,
@@ -74,7 +74,7 @@ def seed_songs():
     title='T-Rex Ice Cubes',
     album_id=3,
     track_num=1,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/a5e8a358625c4968bcc7320bc128c783.mp3',
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/f913ec49ff9c4a98bddb9d919fddcfd1.mp3',
     song_likes=[users[1], users[2]]
   )
 
@@ -82,7 +82,7 @@ def seed_songs():
     title='Orange Juice And Napkins',
     album_id=3,
     track_num=2,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/b97a7bedde0941f3bf9822d593c01b84.mp3',
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/7cf435d9835541a9be06ad277ac14d3b.mp3',
     song_likes=[users[0], users[1], users[2]]
   )
 
@@ -90,21 +90,21 @@ def seed_songs():
     title='Canned Air',
     album_id=3,
     track_num=3,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/c3f6cec84a7e455cb68cdc4c93722e41.mp3'
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/aff9664b152e4afaa5a10c519364bc47.mp3'
   )
 
   song_8 = Song(
     title='Ethernet Sleepover',
     album_id=3,
     track_num=4,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/e4b76fdc729449dc9f2fbf928a471307.mp3'
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/2e3e8b46af6440a59e64956705800e16.mp3'
   )
 
   song_9 = Song(
     title='Moonrise On Jupiter',
     album_id=3,
     track_num=5,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/ed9dbc6489d24efaa79108c419bddb5c.mp3',
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/b92a6a08d6094da38e5195780fa625f7.mp3',
     song_likes=[users[0], users[1]]
   )
 
@@ -112,7 +112,7 @@ def seed_songs():
     title='Candlelit Freefall',
     album_id=3,
     track_num=6,
-    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/f30b4a29cf624857bce6a5e2bacd5582.mp3',
+    song_link='https://week-20-awsbucket-audio-dr.s3.us-west-2.amazonaws.com/a1e2c44e058443e688fb85367f935195.mp3',
     song_likes=[users[0], users[2]]
   )
 
