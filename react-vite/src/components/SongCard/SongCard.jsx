@@ -37,13 +37,16 @@ export default function SongCard({ song, source, playlistId }) {
     getAlbum()
   }, [dispatch, song.album_id])
 
-  if (!Object.keys(likedSongs).length) {
-    return null
+  if (currentUser) {
+    if (!Object.keys(likedSongs).length) {
+      return null
+    }
+
+    if (likedSongs.includes(song.id) && !liked) {
+      setLiked(true)
+    }
   }
 
-  if (likedSongs.includes(song.id) && !liked) {
-    setLiked(true)
-  }
   const removeFromPlaylist = async () => {
    const response = await dispatch(deleteSongFromPlaylistThunk(playlistId, song.id))
    if(!response) {
