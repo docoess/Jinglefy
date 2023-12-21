@@ -1,6 +1,6 @@
 .song-card {
     border: 2px solid black;
-    max-width: 80%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     padding: 0 10%;
