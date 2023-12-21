@@ -123,6 +123,7 @@ def delete_song(id):
     return response
 
   else:
+    song.album.num_songs = song.album.num_songs - 1
     old_url = song.song_link
 
     db.session.delete(song)
