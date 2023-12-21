@@ -78,7 +78,7 @@ export default function NewAlbum() {
                     required
                     />
                     {hasSubmitted && validationErrors.title && (
-                        <span className="error-message">{validationErrors.title}</span>
+                        <span className="error">{validationErrors.title}</span>
                     )}
                 </label>
                 <label className="new-album-input">
@@ -92,7 +92,7 @@ export default function NewAlbum() {
                     required
                     />
                     {hasSubmitted && validationErrors.desc && (
-                        <span className="error-message">{validationErrors.desc}</span>
+                        <span className="error">{validationErrors.desc}</span>
                     )}
                 </label>
                 <label className="new-album-input">

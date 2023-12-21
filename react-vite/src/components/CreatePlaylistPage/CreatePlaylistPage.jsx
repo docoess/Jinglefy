@@ -1,8 +1,9 @@
 import { postPlaylistThunk } from "../../redux/playlist"
 import { useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
+import "./CreatePlaylistPage.css"
 
-//todo: Error handling 
+//todo: Error handling
 export default function CreatePlaylistPage() {
     const dispatch = useDispatch()
     const [title, setTitle] = useState("")
@@ -11,7 +12,7 @@ export default function CreatePlaylistPage() {
     const [hasSubmitted,setHasSubmitted] = useState(false)
     const [validationErrors,setValidationErrors] = useState({})
 
-    useEffect(() => { 
+    useEffect(() => {
         const errors = {}
         if (title.length < 3) {
             errors.title = 'Title is required and must be at least 3 characters'
@@ -28,7 +29,7 @@ export default function CreatePlaylistPage() {
         e.preventDefault();
 
         setHasSubmitted(true)
-        
+
         if (Object.values(validationErrors).length) {
             return;
         }
@@ -60,7 +61,7 @@ export default function CreatePlaylistPage() {
                     required
                     />
                      {hasSubmitted && validationErrors.title && (
-                        <span className="error-message">{validationErrors.title}</span>
+                        <span className="error">{validationErrors.title}</span>
                     )}
                 </label>
                 <label className="new-playlist-input">
@@ -71,7 +72,7 @@ export default function CreatePlaylistPage() {
                     onChange={(e) => setCover(e.target.files[0])}
                     />
                       {hasSubmitted && validationErrors.cover && (
-                        <span className="error-message">{validationErrors.cover}</span>
+                        <span className="error">{validationErrors.cover}</span>
                     )}
                 </label>
 
