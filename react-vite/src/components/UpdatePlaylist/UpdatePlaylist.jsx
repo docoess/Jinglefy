@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { onePlaylistThunk, updatePlaylistThunk } from "../../redux/playlist";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams} from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 
 
 export default function UpdatePlaylist() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { playlistId } = useParams();
 
     const playlist = useSelector(state => state.playlists[playlistId])
@@ -22,11 +23,8 @@ export default function UpdatePlaylist() {
         if (title.length < 3) {
             errors.title = 'Title is required and must be at least 3 characters'
         }
-        if (!cover || cover?.length < 1) {
-            errors.cover = 'An image file is required'
-        }
         setValidationErrors(errors)
-    },[title,cover])
+    },[title])
 
     useEffect(() => {
 
@@ -57,6 +55,7 @@ export default function UpdatePlaylist() {
         let data = await dispatch(updatePlaylistThunk(playlistId,formData))
 
         console.log("UPLOAD COMPLETE",data)
+        navigate(`/playlists/${playlistId}`)
     }
 
     return (
