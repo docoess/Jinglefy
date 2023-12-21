@@ -1,6 +1,25 @@
+.profile-dropdown-button {
+ position: relative;
+ display: inline-block;
+}
+
 .profile-dropdown {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  top: 40px;
+  right: 20px;
+  background-color: #ff5000;
+  padding: 10px;
+  border: 2px black solid;
+  border-radius: 5px;
 }
+
+.profile-dropdown > li{
+  list-style: none;
+}
+
 
 .navbar-container{
   background-color: #58019C;
