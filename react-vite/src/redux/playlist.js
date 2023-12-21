@@ -56,6 +56,7 @@ export const postPlaylistThunk = (formData) => async (dispatch) => {
     if(res.ok) {
         const data = await res.json();
         dispatch(getOnePlaylist(data))
+        return data;
     } else {
         const error = await res.json();
         console.log(error)
