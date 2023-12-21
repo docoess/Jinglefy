@@ -25,6 +25,10 @@ def user(id):
     return user.to_dict()
 
 @user_routes.route('/likes')
-@login_required
 def likes():
-    return [song.id for song in current_user.liked_songs]
+    if not current_user:
+        return []
+
+    returnDict = [song.id for song in current_user.liked_songs]
+    returnDict.append(10000000000)
+    return returnDict
