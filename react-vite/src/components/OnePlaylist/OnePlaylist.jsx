@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SongCard from "../SongCard/SongCard";
+import { getLikesThunk } from "../../redux/likes";
 
 export default function OnePlaylist() {
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function OnePlaylist() {
     useEffect(() => {
         const getPlaylists = async () => {
            setErrors(await dispatch(onePlaylistThunk(playlistId)))
+           await dispatch(getLikesThunk())
         }
 
         getPlaylists()
@@ -41,7 +43,7 @@ export default function OnePlaylist() {
             {ownerOptions()}
             {
                 playlist.songs?.map(song => (
-                    <SongCard song={song} key={song.id} />
+                    <SongCard song={song} key={song.id} source={"playlist"} playlistId={playlistId} />
                 ))
             }
         </div>

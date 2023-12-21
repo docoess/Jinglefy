@@ -131,3 +131,40 @@ def delete_song(id):
     remove_file_from_s3(old_url, filetype='audio')
 
     return {"message": "Successfully Deleted"}
+
+@song_routes.route('/<int:id>/like', methods=['POST'])
+@login_required
+def like_song(id):
+  """
+  Likes a song by id
+  """
+
+  song = Song.query.get(id)
+
+  print('BEFORE', song.song_likes)
+
+  if current_user not in song.song_likes:
+    print('IN THE IF BLOCK')
+    song.song_likes.append(current_user)
+
+    db.session.commit()
+
+  print('AFTER', song.song_likes)
+
+  return [song.id for song in current_user.liked_songs]
+
+@song_routes.route('/<int:id>/unlike', methods=['PATCH'])
+@login_required
+def unlike_song(id):
+  """
+  Unlikes a song by id
+  """
+
+  song = Song.query.get(id)
+
+  if current_user in song.song_likes:
+    song.song_likes.remove(current_user)
+
+    db.session.commit()
+
+  return [song.id for song in current_user.liked_songs]

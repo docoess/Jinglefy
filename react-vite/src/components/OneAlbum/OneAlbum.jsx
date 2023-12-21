@@ -5,6 +5,7 @@ import DeleteAlbum from "./OptionButtons/DeleteAlbum";
 import { oneAlbumThunk } from "../../redux/album";
 import { useEffect, useState } from "react";
 import SongCard from "../SongCard/SongCard";
+import { getLikesThunk } from "../../redux/likes";
 
 const formattedDate = (date) => {
     const d = new Date(date);
@@ -32,7 +33,7 @@ export default function OneAlbum() {
     if(album != undefined) {
     // ? ^ trying to key into undefined in ANY way throws an error
     // best solution I've found is != null/undefined
-        if (album.songs) { 
+        if (album.songs) {
              songs = Object.values(album.songs)
 
         }
@@ -53,10 +54,10 @@ export default function OneAlbum() {
     useEffect(() => {
         const getAlbums = async () => {
            setErrors(await dispatch(oneAlbumThunk(albumId)))
+           await dispatch(getLikesThunk())
         }
 
         getAlbums()
-        // navigate(`/albums/${albumId}`)
     }, [dispatch, albumId])
 
 
@@ -71,7 +72,7 @@ export default function OneAlbum() {
             {ownerOptions()}
             {
                 songs?.map(song => (
-                    <SongCard song={song} key={song.id} />
+                    <SongCard song={song} key={song.id} source={"album"} />
                 ))
             }
         </div>

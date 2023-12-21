@@ -10,5 +10,7 @@ body{
 }
 
 .error {
-    color: #ff5000
+    color: #ff5000;
+    margin-top: 8px;
+    font-weight: bold;
 }

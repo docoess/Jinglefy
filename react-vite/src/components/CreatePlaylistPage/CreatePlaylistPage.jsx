@@ -1,17 +1,39 @@
 import { postPlaylistThunk } from "../../redux/playlist"
 import { useDispatch } from "react-redux"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import "./CreatePlaylistPage.css"
 
-//todo: Error handling 
+//todo: Error handling
 export default function CreatePlaylistPage() {
     const dispatch = useDispatch()
     const [title, setTitle] = useState("")
-    const [cover, setCover] = useState(null)
+    const [cover, setCover] = useState("")
     const [imageLoading, setImageLoading] = useState(false)
-    // const [errors, setErrors] = useState({})
+    const [hasSubmitted,setHasSubmitted] = useState(false)
+    const [validationErrors,setValidationErrors] = useState({})
+
+    useEffect(() => {
+        const errors = {}
+        if (title.length < 3) {
+            errors.title = 'Title is required and must be at least 3 characters'
+        }
+        if (!cover || cover?.length < 1) {
+            errors.cover = 'An image file is required'
+        }
+        setValidationErrors(errors)
+    },[title,cover])
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setHasSubmitted(true)
+
+        if (Object.values(validationErrors).length) {
+            return;
+        }
+
         const formData = new FormData();
         formData.append("cover_image", cover);
         formData.append("title", title)
@@ -38,6 +60,9 @@ export default function CreatePlaylistPage() {
                     onChange={(e) => setTitle(e.target.value)}
                     required
                     />
+                     {hasSubmitted && validationErrors.title && (
+                        <span className="error">{validationErrors.title}</span>
+                    )}
                 </label>
                 <label className="new-playlist-input">
                    <span>Upload a cover image for your playlist!</span>
@@ -46,7 +71,11 @@ export default function CreatePlaylistPage() {
                     accept="image/*"
                     onChange={(e) => setCover(e.target.files[0])}
                     />
+                      {hasSubmitted && validationErrors.cover && (
+                        <span className="error">{validationErrors.cover}</span>
+                    )}
                 </label>
+
                 <button className="new-playlist-submit-button" type="submit">Submit</button>
                 {(imageLoading)&& <p>Loading...</p>}
             </form>
