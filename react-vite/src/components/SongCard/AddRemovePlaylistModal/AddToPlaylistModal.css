@@ -1,0 +1,43 @@
+.add-to-playlist-modal {
+    background-color: #36454F;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 300px;
+    justify-content: space-between;
+}
+
+.add-to-playlist-modal > h1 {
+    text-align: center;
+
+}
+
+.add-to-playlist-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px;
+}
+
+.add-to-playlist-button{
+    margin: 10px;
+    width: 60%;
+    height: 40px;
+    background-color: #74A2FF ;
+    color: white;
+
+    &:hover {
+        box-shadow: 2px 2px black;
+    }
+}
+
+.add-to-playlist-select{
+    margin: 10px;
+    width: 60%;
+    height: 40px;
+    background-color: white ;
+    color: black;
+}

@@ -1,14 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
-import { oneAlbumThunk, deleteSongThunk } from "../../redux/album";
-import { useEffect, useState } from "react";
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import AddToPlaylistModal from "./AddRemovePlaylistModal/AddToPlaylistModal";
-import DeleteSongModal from "./DeleteSongModal";
-import { useNavigate } from "react-router-dom";
+import { oneAlbumThunk, deleteSongThunk } from "../../redux/album";
 import { deleteSongFromPlaylistThunk } from "../../redux/playlist";
 import { addLikeThunk, removeLikeThunk } from "../../redux/likes";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import { useDispatch, useSelector } from "react-redux";
+import DeleteSongModal from "./DeleteSongModal";
+import { useNavigate } from "react-router-dom";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import "./SongCard.css"
 
-export default function SongCard({ song, source, playlistId }) {
+// import { FaBeer } from 'react-icons/fa';
+
+// class Question extends React.Component {
+//   render() {
+//     return <h3> Lets go for a <FaBeer />? </h3>
+//   }
+// }
+
+export default function SongCard({ song, source, playlistId, artistId }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user)
@@ -37,7 +47,6 @@ export default function SongCard({ song, source, playlistId }) {
     getAlbum()
   }, [dispatch, song.album_id])
 
-  console.log('LIKED SONGS LENGTH: ', Object.keys(likedSongs).length)
   if (currentUser) {
     if (!Object.keys(likedSongs).length) {
       return null
@@ -56,20 +65,23 @@ export default function SongCard({ song, source, playlistId }) {
   }
 
 // todo: owner auth check for delete button
+
+ 
   const checkSource = () => {
     if (source == 'album') {
       return (
         <>
-        <OpenModalMenuItem itemText={'Add to playlist'} modalComponent={<AddToPlaylistModal song={song} />} />
-        <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeleteSongModal song={song}/>} />
+          <OpenModalMenuItem itemText={'Add to playlist'} modalComponent={<AddToPlaylistModal song={song} />} className={"fake-button"}/>
+          {(currentUser != null && currentUser.id == artistId) && (<OpenModalMenuItem itemText={'Delete'} modalComponent={<DeleteSongModal song={song} />}  className={"fake-button"}/>)}
         </>
+
       )
     }
 
     if (source == 'playlist') {
       return (
         <>
-        <button onClick={removeFromPlaylist}>Remove from playlist</button>
+          <div className="fake-button" onClick={removeFromPlaylist}>Remove from playlist</div>
         </>
       )
     }
@@ -78,25 +90,25 @@ export default function SongCard({ song, source, playlistId }) {
 
   console.log("deleted value: ",deleted)
   return !deleted &&(
-    <div>
-      <p>{numLikes} likes</p>
-      <p><span>{source == "album" && song.track_num + ". "}</span><span>{song.title}</span><span><audio controls src={song.song_link}>fallback placeholder</audio></span></p>
-      <p>
-        { currentUser != null && (
+    <div className="song-card">
+        <div className="song-card-upper">
+          <div className="song-card-song-title">
+            {source == "album" && song.track_num + ". "}{song.title}:
+            <audio controls src={song.song_link} className="song-card-song">fallback placeholder</audio>
+          </div>
+          { currentUser != null && (
           liked ?
-            <span onClick={removeLike}>
-              LIKED
-            </span> :
-            <span onClick={addLike}>
-              UNLIKED
-            </span>
-
+              <FaHeart onClick={removeLike} className="like-button"/>
+                :
+              <FaRegHeart onClick={addLike} className="like-button" />
         )}
-      </p>
+        </div>
+
+
       {/* <button>Like</button> <OpenModalMenuItem itemText={'Add to playlist'} modalComponent={<AddToPlaylistModal song={song} />} />
 
         <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeleteSongModal />} /> */}
-      {checkSource()}
+      <div className="song-card-buttons-likes-container"><div className="like-count">{numLikes} Likes </div> <div className="song-card-buttons-container">{checkSource()}</div></div>
     </div>
   )
 }

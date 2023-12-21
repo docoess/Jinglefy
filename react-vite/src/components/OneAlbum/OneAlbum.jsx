@@ -76,7 +76,7 @@ export default function OneAlbum() {
             {ownerOptions()}
             {
                 songs?.map(song => (
-                    <SongCard song={song} key={song.id} source={"album"} />
+                    <SongCard song={song} key={song.id} source={"album"} artistId={album.artist_id} />
                 ))
             }
             {(currentUser && album.artist_id == currentUser.id) && <button onClick={addSongButton}>Add a Song</button>}
