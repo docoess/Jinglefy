@@ -12,7 +12,7 @@ export default function UpdateAlbum ()  {
 
   return (
     <>
-      <button onClick={handleSubmit} >Update</button>
+      <div className="fake-button" onClick={handleSubmit} >Update</div>
     </>
   )
 }

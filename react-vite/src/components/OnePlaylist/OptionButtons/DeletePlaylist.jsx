@@ -12,7 +12,7 @@ export default function DeleteAlbum ()  {
 
   return (
     <>
-      <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeletePlaylistModal playlistId={playlistId} />} />
+      <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeletePlaylistModal playlistId={playlistId} />} className={"fake-button"} />
     </>
   )
 }

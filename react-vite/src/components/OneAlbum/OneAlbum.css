@@ -1,0 +1,30 @@
+.album-details-container{
+    display: flex;
+    border: 5px gray outset;
+    margin: 15px;
+    padding: 5px;
+}
+
+.album-details-cover-image {
+    width: 300px;
+    height: 300px
+}
+
+.album-details-text {
+    margin-left: 10px;
+}
+
+.album-details-button-container {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.songs-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.album-details-desc {
+    text-align: justify;
+}
