@@ -1,11 +1,14 @@
 import { allPlaylistsThunk } from "../../redux/playlist";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PlaylistCard from "./PlaylistCard";
+import './AllPlaylists.css'
 
 //todo: add create playlist button
 
 export default function AllPlaylists() {
+    const redirect = useNavigate();
     const dispatch = useDispatch();
     const [errors, setErrors] = useState(null)
     const allPlaylists = useSelector(state => Object.values(state.playlists))
@@ -20,6 +23,9 @@ export default function AllPlaylists() {
         getPlaylists()
     }, [dispatch])
 
+    const onClick = () => {
+        return redirect(`/playlists/new`)
+     }
     if(currentUser == null){
         return (
             <h1>Please sign in to view playlists!</h1>
@@ -27,14 +33,15 @@ export default function AllPlaylists() {
     }
 
     return (
-        <>
-            <h1 className="">Browse all of your Jingle Playlists!</h1>
-            <div className="">
+        <div className="all-playlists">
+            <h1 className="all-playlists-header">Browse all of your Jingle Playlists!</h1>
+            <div className="all-playlists-container">
                 {errors && <p>{errors}</p>}
                 {allPlaylists.map(playlist => (
                     <PlaylistCard playlist={playlist} key={playlist.id}/>
                 ))}
             </div>
-        </>
+            <button onClick={onClick} className="all-playlists-new-playlist-button">Create a new Jingle Playlist!</button>
+        </div>
     )
 }

@@ -1,21 +1,21 @@
-.new-album-container {
+.new-playlist-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: #74A2FF
 }
 
-.new-album-header {
+.new-playlist-header {
     font-size: 40px;
 }
 
-.new-album-form {
+.new-playlist-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.new-album-input {
+.new-playlist-input {
     display: flex;
     flex-direction: column;
     margin: 10px 0;
@@ -28,12 +28,12 @@
 }
 
 
-.new-album-input > input::placeholder {
+.new-playlist-input > input::placeholder {
     color:black
 }
 
 
-.new-album-input > input[type="file"] {
+.new-playlist-input > input[type="file"] {
     padding: 4px;
     margin: -4px;
     position: relative;
@@ -56,7 +56,7 @@
     }
   }
 
-  .new-album-desc {
+  .new-playlist-desc {
     resize: none;
     width: 80%;
     height: 100px;
@@ -65,7 +65,7 @@
     }
   }
 
-.new-album-submit-button {
+.new-playlist-submit-button {
     width: 300px;
     height: 40px;
     background-color: #74A2FF ;

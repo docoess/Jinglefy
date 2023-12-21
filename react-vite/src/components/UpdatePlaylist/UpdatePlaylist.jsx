@@ -17,7 +17,7 @@ export default function UpdatePlaylist() {
     const [hasSubmitted, setHasSubmitted] = useState(false)
 
 
-    useEffect(() => { 
+    useEffect(() => {
         const errors = {}
         if (title.length < 3) {
             errors.title = 'Title is required and must be at least 3 characters'
@@ -28,14 +28,14 @@ export default function UpdatePlaylist() {
         setValidationErrors(errors)
     },[title,cover])
 
-    useEffect(() => { 
+    useEffect(() => {
 
         dispatch(onePlaylistThunk(playlistId))
 
     },[dispatch,playlistId])
 
 
- 
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,7 +46,7 @@ export default function UpdatePlaylist() {
         if (Object.values(validationErrors).length) {
             return;
         }
-        
+
         const formData = new FormData();
 
         formData.append("cover_image", cover);
@@ -55,18 +55,19 @@ export default function UpdatePlaylist() {
         // some sort of loading message is a good idea
         setImageLoading(true);
         let data = await dispatch(updatePlaylistThunk(playlistId,formData))
-        
+
         console.log("UPLOAD COMPLETE",data)
     }
 
     return (
 
-        <>
-            <h1>Update a new playlist!</h1>
+        <div className="new-playlist-container">
+            <h1 className="new-playlist-header">Update a new playlist!</h1>
             <form
+            className="new-playlist-form"
             onSubmit={handleSubmit}
             encType="multipart/form-data">
-                <label>
+                <label className="new-playlist-input">
                     What is the title for your playlist?
                     <input
                     type="text"
@@ -76,10 +77,10 @@ export default function UpdatePlaylist() {
                     required
                     />
                         {hasSubmitted && validationErrors.title && (
-                        <span className="error-message">{validationErrors.title}</span>
+                        <span className="error">{validationErrors.title}</span>
                     )}
                 </label>
-                <label>
+                <label className="new-playlist-input">
                     Upload a cover image for your playlist!
                     <input
                     type="file"
@@ -87,12 +88,12 @@ export default function UpdatePlaylist() {
                     onChange={(e) => setCover(e.target.files[0])}
                     />
                        {hasSubmitted && validationErrors.cover && (
-                        <span className="error-message">{validationErrors.cover}</span>
+                        <span className="error">{validationErrors.cover}</span>
                     )}
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit" className="new-playlist-submit-button">Submit</button>
                 {(imageLoading)&& <p>Loading...</p>}
             </form>
-        </>
+        </div>
     )
 }
