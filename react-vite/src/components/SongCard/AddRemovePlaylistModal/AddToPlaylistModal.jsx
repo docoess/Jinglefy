@@ -21,18 +21,19 @@ export default function AddToPlaylistModal({ song }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         await dispatch(addSongToPlaylistThunk(targetPlaylist, song.id))
+        closeModal()
     }
 
     return playlists && (
         <div>
-            <h1>What playlist would you like to add "{ song.title }" to?</h1>
+            <h1>What playlist would you like to add &quot;{ song.title }&quot; to?</h1>
             <form onSubmit={handleSubmit}>
                 {
                     playlists && Object.keys(playlists).length ? (
                         <select onChange={e => setTargetPlaylist(e.target.value)}>
                             <option value="" disabled selected key="0">Select your option</option>
                             {Object.values(playlists).map(playlist => (
-                                <option value={playlist.id}>{playlist.title} key={playlist.id}</option>
+                                <option value={playlist.id}  key={playlist.id}>{playlist.title}</option>
                             ))}
                         </select>
                     ) : <p>No playlists yet!</p>

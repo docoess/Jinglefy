@@ -1,6 +1,8 @@
 import { deletePlaylistThunk } from "../../../redux/playlist";
+import OpenModalMenuItem from "../../Navigation/OpenModalMenuItem";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import DeletePlaylistModal from "../DeletePlaylistModal";
 
 //todo: still needs work
 export default function DeleteAlbum ()  {
@@ -8,14 +10,9 @@ export default function DeleteAlbum ()  {
   const dispatch = useDispatch()
   const {playlistId} = useParams()
 
-  const handleSubmit = async () => {
-      await dispatch(deletePlaylistThunk(playlistId))
-      navigate('/playlists')
-  }
-
   return (
     <>
-      <button onClick={handleSubmit} >Delete</button>
+      <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeletePlaylistModal playlistId={playlistId} />} />
     </>
   )
 }

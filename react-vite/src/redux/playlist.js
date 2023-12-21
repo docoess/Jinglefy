@@ -56,6 +56,7 @@ export const postPlaylistThunk = (formData) => async (dispatch) => {
     if(res.ok) {
         const data = await res.json();
         dispatch(getOnePlaylist(data))
+        return data;
     } else {
         const error = await res.json();
         console.log(error)
@@ -136,7 +137,7 @@ export const deleteSongFromPlaylistThunk = (playlistId, songId) => async (dispat
 function playlistReducer(state = {}, action) {
     switch (action.type) {
         case GET_ALL_PLAYLIST: {
-            const newState = {...state}
+            const newState = {}
             action.payload.forEach(playlist => {
                 newState[playlist.id] = playlist
             });

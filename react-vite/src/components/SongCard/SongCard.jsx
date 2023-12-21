@@ -37,13 +37,17 @@ export default function SongCard({ song, source, playlistId }) {
     getAlbum()
   }, [dispatch, song.album_id])
 
-  if (!Object.keys(likedSongs).length) {
-    return null
+  console.log('LIKED SONGS LENGTH: ', Object.keys(likedSongs).length)
+  if (currentUser) {
+    if (!Object.keys(likedSongs).length) {
+      return null
+    }
+
+    if (likedSongs.includes(song.id) && !liked) {
+      setLiked(true)
+    }
   }
 
-  if (likedSongs.includes(song.id) && !liked) {
-    setLiked(true)
-  }
   const removeFromPlaylist = async () => {
    const response = await dispatch(deleteSongFromPlaylistThunk(playlistId, song.id))
    if(!response) {
@@ -76,9 +80,9 @@ export default function SongCard({ song, source, playlistId }) {
   return !deleted &&(
     <div>
       <p>{numLikes} likes</p>
-      <p><span>{song.track_num}. </span><span>{song.title}</span><span><audio controls src={song.song_link}>fallback placeholder</audio></span></p>
+      <p><span>{source == "album" && song.track_num + ". "}</span><span>{song.title}</span><span><audio controls src={song.song_link}>fallback placeholder</audio></span></p>
       <p>
-        {
+        { currentUser != null && (
           liked ?
             <span onClick={removeLike}>
               LIKED
@@ -87,7 +91,7 @@ export default function SongCard({ song, source, playlistId }) {
               UNLIKED
             </span>
 
-        }
+        )}
       </p>
       {/* <button>Like</button> <OpenModalMenuItem itemText={'Add to playlist'} modalComponent={<AddToPlaylistModal song={song} />} />
 

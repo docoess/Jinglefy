@@ -23,7 +23,7 @@ export default function AllAlbums() {
     }, [dispatch])
 
     const onClick = () => {
-        return redirect(`/playlists/new`)
+        return redirect(`/albums/new`)
      }
 
     return (

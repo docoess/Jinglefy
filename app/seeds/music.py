@@ -15,7 +15,7 @@ def seed_albums():
 
   album_2 = Album(
     title='Our Very Second Album',
-    cover_image='https://week-20-awsbucket-dr.s3.us-west-2.amazonaws.com/b675637d431348a8b743c7aa38930388.jpg',
+    cover_image='https://week-20-awsbucket-dr.s3.us-west-2.amazonaws.com/2feb0d5672ef45bbb383d617a7bb026b.jpg',
     desc='The sophmore album from top artist marnie!',
     artist_id=2,
     num_songs=2,
@@ -141,7 +141,7 @@ def seed_playlists():
   playlist_2 = Playlist(
     title='Demo User Playlist',
     owner_id=1,
-    cover_img='https://week-20-awsbucket-dr.s3.us-west-2.amazonaws.com/bd9d9a163e7043fc886fb39aff71ee88.jpg',
+    cover_img='https://week-20-awsbucket-dr.s3.us-west-2.amazonaws.com/2feb0d5672ef45bbb383d617a7bb026b.jpg',
     playlist_songs=[songs[1], songs[4], songs[5], songs[6], songs[7]]
   )
 

@@ -60,6 +60,10 @@ export default function OneAlbum() {
         getAlbums()
     }, [dispatch, albumId])
 
+    const addSongButton = () => {
+        navigate(`/albums/${albumId}/new-song`)
+    }
+
 
     return album && (
         <div>
@@ -75,6 +79,7 @@ export default function OneAlbum() {
                     <SongCard song={song} key={song.id} source={"album"} />
                 ))
             }
+            {(currentUser && album.artist_id == currentUser.id) && <button onClick={addSongButton}>Add a Song</button>}
         </div>
     )
 }
