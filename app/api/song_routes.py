@@ -151,7 +151,9 @@ def like_song(id):
 
   print('AFTER', song.song_likes)
 
-  return [song.id for song in current_user.liked_songs]
+  returnDict = [song.id for song in current_user.liked_songs]
+  returnDict.append(10000000000)
+  return returnDict
 
 @song_routes.route('/<int:id>/unlike', methods=['PATCH'])
 @login_required
@@ -167,4 +169,6 @@ def unlike_song(id):
 
     db.session.commit()
 
-  return [song.id for song in current_user.liked_songs]
+  returnDict = [song.id for song in current_user.liked_songs]
+  returnDict.append(10000000000)
+  return returnDict
