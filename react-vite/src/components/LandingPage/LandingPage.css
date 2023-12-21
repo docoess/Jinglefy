@@ -1,0 +1,10 @@
+.landing-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-image {
+  border-radius: 10px;
+  margin: 40px 0;
+}
