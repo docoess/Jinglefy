@@ -1,21 +1,19 @@
+import OpenModalMenuItem from "../../Navigation/OpenModalMenuItem";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteAlbumThunk } from "../../../redux/album";
 import { useDispatch } from "react-redux";
+import DeleteAlbumModal from "../DeleteAlbumModal";
+import '../../SongCard/SongCard.css'
 
-export default function DeleteAlbum ()  { 
-  const navigate = useNavigate();
+export default function DeleteAlbum ()  {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { albumId } = useParams();
 
-    const handleSubmit = async () => {
-        await dispatch(deleteAlbumThunk(albumId))
-        navigate(`/albums`)
-    }
-    
 
   return (
     <>
-      <button onClick={handleSubmit} >Delete</button>
+      <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeleteAlbumModal albumId={albumId} />} className={"fake-button"} />
     </>
   )
 }

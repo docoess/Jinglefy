@@ -1,0 +1,24 @@
+.delete-modal{
+    background-color: #36454F;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 500px;
+}
+
+.delete-modal > h1 {
+    text-align: center;
+}
+
+.delete-modal-button {
+    margin: 10px;
+    width: 60%;
+    height: 40px;
+    background-color: #74A2FF ;
+    color: white;
+
+    &:hover {
+        box-shadow: 2px 2px black;
+    }
+}

@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import UpdateAlbum from "./OptionButtons/UpdateAlbum";
 import DeleteAlbum from "./OptionButtons/DeleteAlbum";
 import { oneAlbumThunk } from "../../redux/album";
+import { getLikesThunk } from "../../redux/likes";
 import { useEffect, useState } from "react";
 import SongCard from "../SongCard/SongCard";
-import { getLikesThunk } from "../../redux/likes";
+import "./OneAlbum.css"
 
 const formattedDate = (date) => {
     const d = new Date(date);
@@ -39,12 +40,17 @@ export default function OneAlbum() {
         }
     }
 
+    const addSongButton = () => {
+        navigate(`/albums/${albumId}/new-song`)
+    }
+
     const ownerOptions = () => {
         if (currentUser != null) {
             if(album.artist_id == currentUser.id) {
-                return <div>
+                return <div className="album-details-button-container">
                     <UpdateAlbum />
                     <DeleteAlbum />
+                    <div className="fake-button" onClick={addSongButton}>Add a Song</div>
                 </div>
             }
         }
@@ -60,26 +66,28 @@ export default function OneAlbum() {
         getAlbums()
     }, [dispatch, albumId])
 
-    const addSongButton = () => {
-        navigate(`/albums/${albumId}/new-song`)
-    }
 
 
     return album && (
         <div>
-            <p>Title: {album.title}</p>
-            <img src={album.cover_image}/>
-            <p>Number of Songs: {album.num_songs}</p>
-            <p>Description: {album.desc}</p>
-            <p>Release Date: {formattedDate(album.release_date)}</p>
-            <p>Made by: {album.artist ? album.artist.username : null}</p>
-            {ownerOptions()}
-            {
-                songs?.map(song => (
-                    <SongCard song={song} key={song.id} source={"album"} />
-                ))
-            }
-            {(currentUser && album.artist_id == currentUser.id) && <button onClick={addSongButton}>Add a Song</button>}
+            <div className="album-details-container">
+            <img className="album-details-cover-image" src={album.cover_image}/>
+                <div className="album-details-text">
+                    <h1 className="album-details-title">{album.title}</h1>
+                    <p>Made by: {album.artist ? album.artist.username : null}</p>
+                    <p>{album.num_songs} songs · {formattedDate(album.release_date)}</p> 
+                    <p className="album-details-desc">{album.desc}</p>
+                    {ownerOptions()}
+                </div>
+            </div>
+            <div className="songs-container">
+                {
+                    songs?.map(song => (
+                        <SongCard song={song} key={song.id} source={"album"} artistId={album.artist_id} />
+                    ))
+                }
+            </div>
+            {(currentUser && album.artist_id == currentUser.id)}
         </div>
     )
 }

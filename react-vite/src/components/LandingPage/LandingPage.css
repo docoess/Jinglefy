@@ -8,3 +8,12 @@
   border-radius: 10px;
   margin: 40px 0;
 }
+
+.landing-h1 {
+  font-size: 60px;
+  color: #58019C;
+  text-shadow: -1px -1px 0 #74A2FF, 
+    1px -1px 0 #74A2FF, 
+    -1px 1px 0 #74A2FF, 
+    1px 1px 0 #74A2FF;
+}
