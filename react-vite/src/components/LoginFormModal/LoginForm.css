@@ -1,9 +1,9 @@
 .login-modal-container {
     display: flex;
+    background-color: #36454F ;
     flex-direction: column;
     align-items: center;
     color: #74A2FF;
-    background-color: #36454F ;
     width: 300px
 }
 
@@ -20,13 +20,13 @@
 .login-modal-input {
     display: flex;
     flex-direction: column;
-    margin: 10px 0;
     background-color: #58019C;
     border: 2px solid black;
-    padding: 16px;
     border-radius: 20px;
-    width: 75%;
     align-items: center;
+    margin: 10px 0;
+    padding: 16px;
+    width: 75%;
 }
 
 .login-modal-input-area {
@@ -34,11 +34,11 @@
 }
 
 .login-modal-submit-button {
-    margin: 10px;
-    width: 60%;
-    height: 40px;
-    background-color: #74A2FF ;
+    background-color: #74A2FF;
     color: white;
+    margin: 10px;
+    height: 40px;
+    width: 60%;
 
     &:hover {
         box-shadow: 2px 2px black;

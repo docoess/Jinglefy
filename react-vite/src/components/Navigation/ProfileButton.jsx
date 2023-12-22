@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
-import LoginFormModal from "../LoginFormModal";
+import { useState, useEffect, useRef } from "react";
+import { thunkLogout } from "../../redux/session";
+import { useNavigate } from "react-router-dom";
 import SignupFormModal from "../SignupFormModal";
+import LoginFormModal from "../LoginFormModal";
 
 function ProfileButton() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);

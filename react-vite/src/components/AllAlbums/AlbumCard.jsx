@@ -19,7 +19,7 @@ export default function AlbumCard({ album }) {
     }
     return (
        <div className="album-card" onClick={onClick}>
-            <p className="album-card-title">{album.title}</p>
+            <h4 className="album-card-title">{album.title}</h4>
             <img className="album-card-image" src={album.cover_image}/>
             <p className="album-card-num-songs">{album.num_songs} Songs</p>
             <p className="album-card-release-date">Released on {formattedDate(album.release_date)}</p>

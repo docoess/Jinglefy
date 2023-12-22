@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
 import { oneAlbumThunk, updateALbumThunk } from "../../redux/album";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams} from 'react-router-dom';
-
-//todo: Does not update when you submit without a new image
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 export default function NewAlbum() {
     const dispatch = useDispatch();
@@ -54,7 +52,7 @@ export default function NewAlbum() {
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);
-        console.log('COVER', cover)
+        // console.log('COVER', cover)
         await dispatch(updateALbumThunk(albumId,formData))
         setHasSubmitted(false)
         navigate(`/albums/${albumId}`)

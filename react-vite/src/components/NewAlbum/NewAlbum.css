@@ -27,11 +27,9 @@
     align-items: center;
 }
 
-
 .new-album-input > input::placeholder {
     color:black
 }
-
 
 .new-album-input > input[type="file"] {
     padding: 4px;

@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AlbumCard from "./AlbumCard";
 
-// todo: Refresh error after delete
-
 export default function AllAlbums() {
     const redirect = useNavigate();
     const dispatch = useDispatch();

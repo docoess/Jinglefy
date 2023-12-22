@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
 import { deletePlaylistThunk, allPlaylistsThunk } from "../../redux/playlist";
+import { useModal } from "../../context/Modal";
 import { useNavigate } from "react-router-dom";
-import '../DeleteModal.css'
+import { useDispatch } from "react-redux";
+import '../DeleteModal.css';
 
 export default function DeletePlaylistModal( {playlistId} ) {
   const dispatch = useDispatch()

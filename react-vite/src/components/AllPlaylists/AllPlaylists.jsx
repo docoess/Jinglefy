@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PlaylistCard from "./PlaylistCard";
-import './AllPlaylists.css'
-
-//todo: add create playlist button
+import './AllPlaylists.css';
 
 export default function AllPlaylists() {
     const redirect = useNavigate();
@@ -34,7 +32,7 @@ export default function AllPlaylists() {
 
     return (
         <div className="all-playlists">
-            <h1 className="all-playlists-header">Browse all of your Jingle Playlists!</h1>
+            <h4 className="all-playlists-header">Browse all of your Jingle Playlists!</h4>
             <div className="all-playlists-container">
                 {errors && <p>{errors}</p>}
                 {allPlaylists.map(playlist => (

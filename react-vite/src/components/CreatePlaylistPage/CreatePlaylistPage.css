@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #74A2FF
+    color: #74A2FF;
 }
 
 .new-playlist-header {
@@ -27,11 +27,9 @@
     align-items: center;
 }
 
-
 .new-playlist-input > input::placeholder {
     color:black
 }
-
 
 .new-playlist-input > input[type="file"] {
     padding: 4px;

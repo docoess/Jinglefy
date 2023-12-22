@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { thunkSignup } from "../../redux/session";
-import './SignupForm.css'
+import { useState } from "react";
+import './SignupForm.css';
 
 function SignupFormPage() {
   const dispatch = useDispatch();

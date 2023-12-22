@@ -1,27 +1,26 @@
 .song-card {
-    border: 2px solid black;
-    width: 60%;
     display: flex;
     flex-direction: column;
-    padding: 0 10%;
     background-color: #58019C;
-    color: #74A2FF;
+    border: 2px solid black;
+    box-sizing: border-box;
     border-radius: 15px;
     margin-bottom: 10px;
-    box-sizing: border-box;
+    color: #74A2FF;
+    padding: 0 10%;
+    width: 60%;
 }
 
 .song-card-upper{
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     margin-top: 10px;
 }
 
 .song-card-song-title{
     display: flex;
     align-items: center;
-
 }
 
 
@@ -37,8 +36,8 @@
 .song-card-buttons-likes-container{
     display: flex;
     justify-content: space-between;
-    width: 100%;
     margin-top: 15px;
+    width: 100%;
 }
 
 .like-button{
@@ -56,10 +55,10 @@
 
 .fake-button{
     border: 1px solid black;
+    background-color: #74A2FF;
+    color: black;
     padding: 5px;
     margin: 2px;
-    color: black;
-    background-color: #74A2FF;
 
     &:hover{
         cursor: pointer;

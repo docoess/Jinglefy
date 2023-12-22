@@ -1,8 +1,7 @@
-from flask_wtf import FlaskForm
 from flask_wtf.file import FileRequired, FileAllowed
-from wtforms import StringField, FileField
 from wtforms.validators import DataRequired
-# from app.models import Album
+from wtforms import StringField, FileField
+from flask_wtf import FlaskForm
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 

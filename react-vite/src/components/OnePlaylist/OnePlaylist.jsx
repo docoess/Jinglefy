@@ -1,12 +1,12 @@
 import UpdatePlaylist from "./OptionButtons/UpdatePlaylist";
-import DeletePlaylist from "./OptionButtons/DeletePlaylist"
+import DeletePlaylist from "./OptionButtons/DeletePlaylist";
 import { onePlaylistThunk } from "../../redux/playlist";
 import { useDispatch, useSelector } from "react-redux";
 import { getLikesThunk } from "../../redux/likes";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SongCard from "../SongCard/SongCard";
-import "./OnePlaylist.css"
+import "./OnePlaylist.css";
 
 export default function OnePlaylist() {
     const dispatch = useDispatch();

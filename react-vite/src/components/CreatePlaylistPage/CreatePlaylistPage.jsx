@@ -1,10 +1,9 @@
-import { postPlaylistThunk } from "../../redux/playlist"
-import { useDispatch } from "react-redux"
-import { useEffect, useState } from "react"
-import "./CreatePlaylistPage.css"
-import { useNavigate } from "react-router-dom"
+import { postPlaylistThunk } from "../../redux/playlist";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import "./CreatePlaylistPage.css";
 
-//todo: Error handling
 export default function CreatePlaylistPage() {
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -43,7 +42,7 @@ export default function CreatePlaylistPage() {
         // some sort of loading message is a good idea
         setImageLoading(true);
         let data = await dispatch(postPlaylistThunk(formData))
-        console.log("UPLOAD COMPLETE", data)
+        // console.log("UPLOAD COMPLETE", data)
         navigate(`/playlists/${data.id}`)
     }
 
