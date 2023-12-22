@@ -63,7 +63,7 @@ export default function SongCard({ song, source, playlistId, artistId }) {
    }
   }
 
- 
+
   const checkSource = () => {
     if (source == 'album') {
       return (
@@ -93,14 +93,14 @@ export default function SongCard({ song, source, playlistId, artistId }) {
             {source == "album" && song.track_num + ". "}{song.title}:
             <audio controls src={song.song_link} className="song-card-song">fallback placeholder</audio>
           </div>
-          { currentUser != null && (
+
+        </div>
+      <div className="song-card-buttons-likes-container"><div className="like-count">{numLikes} Likes { currentUser != null && (
           liked ?
               <FaHeart onClick={removeLike} className="like-button"/>
                 :
               <FaRegHeart onClick={addLike} className="like-button" />
-        )}
-        </div>
-      <div className="song-card-buttons-likes-container"><div className="like-count">{numLikes} Likes </div> <div className="song-card-buttons-container">{checkSource()}</div></div>
+        )}</div> <div className="song-card-buttons-container">{checkSource()}</div></div>
     </div>
   )
 }
