@@ -14,8 +14,8 @@
 .new-song-input {
     display: flex;
     flex-direction: column;
-    margin: 10px 0;
     background-color: #58019C;
+    margin: 10px 0;
     border: 2px solid black;
     padding: 32px;
     border-radius: 20px;

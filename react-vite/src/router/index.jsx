@@ -1,17 +1,17 @@
-import { createBrowserRouter } from 'react-router-dom';
-import LoginFormPage from '../components/LoginFormPage';
+import CreatePlaylistPage from '../components/CreatePlaylistPage/CreatePlaylistPage';
+import CreateSongForm from '../components/CreateSongForm/CreateSongForm';
+import UpdatePlaylist from '../components/UpdatePlaylist/UpdatePlaylist';
+import UpdateAlbums from '../components/UpdateAlbums/UpdateAlbums';
+import AllPlaylists from '../components/AllPlaylists/AllPlaylists';
+import LandingPage from '../components/LandingPage/LandingPage';
+import OnePlaylist from '../components/OnePlaylist/OnePlaylist';
 import SignupFormPage from '../components/SignupFormPage';
 import AllAlbums from '../components/AllAlbums/AllAlbums';
+import LoginFormPage from '../components/LoginFormPage';
+import { createBrowserRouter } from 'react-router-dom';
 import OneAlbum from '../components/OneAlbum/OneAlbum';
-import Layout from './Layout';
 import NewAlbum from '../components/NewAlbum/NewAlbum';
-import LandingPage from '../components/LandingPage/LandingPage';
-import UpdateAlbums from '../components/UpdateAlbums/UpdateAlbums';
-import CreateSongForm from '../components/CreateSongForm/CreateSongForm';
-import AllPlaylists from '../components/AllPlaylists/AllPlaylists';
-import OnePlaylist from '../components/OnePlaylist/OnePlaylist';
-import CreatePlaylistPage from '../components/CreatePlaylistPage/CreatePlaylistPage';
-import UpdatePlaylist from '../components/UpdatePlaylist/UpdatePlaylist';
+import Layout from './Layout';
 
 export const router = createBrowserRouter([
   {

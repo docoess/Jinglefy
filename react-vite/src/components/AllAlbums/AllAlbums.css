@@ -6,26 +6,26 @@
 
 .all-albums-header{
     text-align: center;
-    color: white;
     font-size: 50px;
+    color: white;
 }
 
 .all-albums-container{
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    flex-wrap: wrap;
 
 }
 
 .album-card{
-    margin: 10px;
+    box-shadow: 2px 2px 2px 2px #ff5000;
     background-color: #58019C;
-    padding: 1%;
     border-radius: 10px;
+    text-align: center;
     color: #74A2FF;
     font-size: 18px;
-    box-shadow: 2px 2px 2px 2px #ff5000;
-    text-align: center;
+    margin: 10px;
+    padding: 1%;
 }
 
 .album-card:hover{
@@ -34,19 +34,19 @@
 }
 
 .album-card-image{
-    width: 300px;
-    height: 300px;
+    border: 2px solid black;
     border-radius: 10px;
-    border: 2px solid black
+    height: 300px;
+    width: 300px;
 }
 
 .all-albums-new-album-button{
-    margin: 10px;
-    width: 20%;
-    height: 40px;
+    box-shadow: 1px 1px 2px  #ff5000;
     background-color: #74A2FF ;
     color: white;
-    box-shadow: 1px 1px 2px  #ff5000;
+    margin: 10px;
+    height: 40px;
+    width: 20%;
 
     &:hover {
         box-shadow: 3px 3px 4px  #ff5000;

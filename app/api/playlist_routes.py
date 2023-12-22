@@ -1,9 +1,8 @@
-from flask import Blueprint, request, make_response
-from flask_login import login_required, current_user
 from .aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
-from app.models import  Playlist, Song, db
 from ..forms import PlaylistForm, UpdatePlaylistForm
-from datetime import date
+from flask_login import login_required, current_user
+from flask import Blueprint, request, make_response
+from app.models import  Playlist, Song, db
 
 playlist_routes = Blueprint('playlists', __name__)
 
@@ -50,11 +49,10 @@ def create_playlist():
     """
     Creates a new playlist
     """
-    print("HEY! LISTEN!")
+    # print("HEY! LISTEN!")
     form = PlaylistForm()
 
     form["csrf_token"].data = request.cookies["csrf_token"]
-
     # print("FORM CSRF TOKEN: ", form["csrf_token"])
 
     if form.validate_on_submit():
@@ -64,7 +62,7 @@ def create_playlist():
         print("UPLOAD FROM CREATE ALBUM ROUTE: ", upload)
 
         if "url" not in upload:
-         # if the dictionary doesn't have a url key
+        # if the dictionary doesn't have a url key
         # it means that there was an error when you tried to upload
         # so you send back that error message (and you printed it above)
             return upload
@@ -87,19 +85,19 @@ def create_playlist():
         return form.errors
 
 
-
 @playlist_routes.route('/<int:id>/update', methods=['PUT'])
 @login_required
 def update_playlist(id):
     """
     Updates a playlist
     """
-    print("HEY! LISTEN!")
+    # print("HEY! LISTEN!")
     form = UpdatePlaylistForm()
 
     playlist = Playlist.query.get(id)
 
     form["csrf_token"].data = request.cookies["csrf_token"]
+    # print("FORM CSRF TOKEN: ", form["csrf_token"])
 
     owner_id = playlist.owner_id
 
@@ -107,7 +105,6 @@ def update_playlist(id):
         response = make_response({ "errors": { "message": "forbidden"} }, 401)
         return response
 
-    # print("FORM CSRF TOKEN: ", form["csrf_token"])
 
     if form.validate_on_submit():
 
@@ -115,14 +112,14 @@ def update_playlist(id):
             playlist.title = form.data['title']
 
         if form.data['cover_image'] != 'undefined':
-            print(" ")
-            print("cover image from update playlist: ", form.data["cover_image"])
-            print(" ")
+            # print(" ")
+            # print("cover image from update playlist: ", form.data["cover_image"])
+            # print(" ")
             old_cover = playlist.cover_img
             cover_image = form.data["cover_image"]
             cover_image.filename = get_unique_filename(cover_image.filename)
             upload = upload_file_to_s3(cover_image, filetype="image")
-            print("UPLOAD FROM CREATE ALBUM ROUTE: ", upload)
+            # print("UPLOAD FROM CREATE ALBUM ROUTE: ", upload)
 
             if "url" not in upload:
             # if the dictionary doesn't have a url key
@@ -181,8 +178,7 @@ def add_song_to_playlist(id):
     song = Song.query.get(song_id)
 
     playlist.playlist_songs.append(song)
-
-    print("SONGS IN PLAYLIST AFTER APPEND: ", [song.to_dict() for song in playlist.playlist_songs])
+    # print("SONGS IN PLAYLIST AFTER APPEND: ", [song.to_dict() for song in playlist.playlist_songs])
 
     db.session.commit()
 
@@ -195,7 +191,9 @@ def add_song_to_playlist(id):
 @playlist_routes.route('/<int:id>/remove-song', methods=['PATCH'])
 @login_required
 def remove_song_from_playlist(id):
-
+    """
+    Updates a playlist
+    """
     
     playlist = Playlist.query.get(id)
 
@@ -203,10 +201,9 @@ def remove_song_from_playlist(id):
 
     song = Song.query.get(song_id)
 
-    print("BEFORE: ", [song.to_dict() for song in playlist.playlist_songs])
+    # print("BEFORE: ", [song.to_dict() for song in playlist.playlist_songs])
     playlist.playlist_songs.remove(song)
-
-    print("AFTER: ", [song.to_dict() for song in playlist.playlist_songs])
+    # print("AFTER: ", [song.to_dict() for song in playlist.playlist_songs])
 
     db.session.commit()
 

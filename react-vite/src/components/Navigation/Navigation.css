@@ -4,16 +4,16 @@
 }
 
 .profile-dropdown {
-  position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  top: 40px;
-  right: 20px;
   background-color: #ff5000;
-  padding: 10px;
   border: 2px black solid;
+  justify-content: end;
+  position: absolute;
   border-radius: 5px;
+  padding: 10px;
+  right: 20px;
+  top: 40px;
 }
 
 .profile-dropdown > li{
@@ -22,19 +22,19 @@
 
 
 .navbar-container{
+  box-shadow: 10px 1px 3px 3px  #ff5000;
+  justify-content: space-between;
   background-color: #58019C;
   display: flex;
-  justify-content: space-between;
   height: 10%;
-  box-shadow: 10px 1px 3px 3px  #ff5000;
 }
 
 .navbar-link-container{
   display: flex;
+  justify-content: space-around;
   align-items: center;
   width: 50%;
-  justify-content: space-around;
-}
+} 
 
 .navbar-link{
   color: #74A2FF;

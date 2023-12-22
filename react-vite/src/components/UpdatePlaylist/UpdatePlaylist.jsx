@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
 import { onePlaylistThunk, updatePlaylistThunk } from "../../redux/playlist";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams} from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 
 export default function UpdatePlaylist() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { playlistId } = useParams();
-
     const playlist = useSelector(state => state.playlists[playlistId])
-
     const [title, setTitle] = useState(playlist?.title)
     const [cover, setCover] = useState(playlist?.cover_image)
     const [imageLoading, setImageLoading] = useState(false)
@@ -52,9 +50,9 @@ export default function UpdatePlaylist() {
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);
-        let data = await dispatch(updatePlaylistThunk(playlistId,formData))
+        await dispatch(updatePlaylistThunk(playlistId,formData))
 
-        console.log("UPLOAD COMPLETE",data)
+        // console.log("UPLOAD COMPLETE",data)
         navigate(`/playlists/${playlistId}`)
     }
 

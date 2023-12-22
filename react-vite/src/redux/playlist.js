@@ -1,7 +1,7 @@
 const GET_ALL_PLAYLIST = 'playlist/GET_ALL_PLAYLIST'
 const GET_ONE_PLAYLIST = '/playlist/GET_ONE_PLAYLIST'
 const REMOVE_ONE_PLAYLIST = '/playlist/REMOVE_ONE_PLAYLIST'
-const ADD_SONG_TO_PLAYLIST = '/playlist/ADD_SONG_TO_PLAYLIST'
+// const ADD_SONG_TO_PLAYLIST = '/playlist/ADD_SONG_TO_PLAYLIST'
 
 
 const getAllPlaylists = (playlists) => ({

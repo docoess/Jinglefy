@@ -8,7 +8,7 @@ import DeleteSongModal from "./DeleteSongModal";
 import { useNavigate } from "react-router-dom";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import "./SongCard.css"
+import "./SongCard.css";
 
 // import { FaBeer } from 'react-icons/fa';
 
@@ -19,12 +19,12 @@ import "./SongCard.css"
 // }
 
 export default function SongCard({ song, source, playlistId, artistId }) {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user)
   const likedSongs = useSelector(state => state.likes)
-  const [liked, setLiked] = useState(false)
   const [numLikes, setNumLikes] = useState(song.likes)
+  const [deleted, setDeleted] = useState(false)
+  const [liked, setLiked] = useState(false)
 
   const addLike = async () => {
     await dispatch(addLikeThunk(song.id))
@@ -37,7 +37,6 @@ export default function SongCard({ song, source, playlistId, artistId }) {
     setLiked(!liked)
     setNumLikes(numLikes - 1);
   }
-  const [deleted, setDeleted] = useState(false);
 
   useEffect(() => {
     const getAlbum = async () => {
@@ -64,8 +63,6 @@ export default function SongCard({ song, source, playlistId, artistId }) {
    }
   }
 
-// todo: owner auth check for delete button
-
  
   const checkSource = () => {
     if (source == 'album') {
@@ -88,7 +85,7 @@ export default function SongCard({ song, source, playlistId, artistId }) {
   }
 
 
-  console.log("deleted value: ",deleted)
+  // console.log("deleted value: ",deleted)
   return !deleted &&(
     <div className="song-card">
         <div className="song-card-upper">
@@ -103,11 +100,6 @@ export default function SongCard({ song, source, playlistId, artistId }) {
               <FaRegHeart onClick={addLike} className="like-button" />
         )}
         </div>
-
-
-      {/* <button>Like</button> <OpenModalMenuItem itemText={'Add to playlist'} modalComponent={<AddToPlaylistModal song={song} />} />
-
-        <OpenModalMenuItem itemText={'Delete'} modalComponent={<DeleteSongModal />} /> */}
       <div className="song-card-buttons-likes-container"><div className="like-count">{numLikes} Likes </div> <div className="song-card-buttons-container">{checkSource()}</div></div>
     </div>
   )
@@ -117,7 +109,5 @@ export default function SongCard({ song, source, playlistId, artistId }) {
   Get songs from store
 
   Render related song data
-
-
 
 */

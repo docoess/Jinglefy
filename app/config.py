@@ -1,6 +1,5 @@
 import os
 
-
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     FLASK_RUN_PORT = os.environ.get('FLASK_RUN_PORT')

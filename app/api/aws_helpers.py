@@ -1,7 +1,7 @@
-import boto3
 import botocore
-import os
+import boto3
 import uuid
+import os
 
 IMG_ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 AUDIO_ALLOWED_EXTENSIONS = {"mp3", "ogg", "wav"}

@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
 import { deleteAlbumThunk, allAlbumsThunk } from "../../redux/album";
+import { useModal } from "../../context/Modal";
 import { useNavigate } from "react-router-dom";
-import '../DeleteModal.css'
+import { useDispatch } from "react-redux";
+import '../DeleteModal.css';
 
 export default function DeleteAlbumModal( {albumId} ) {
   const dispatch = useDispatch()

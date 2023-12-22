@@ -4,11 +4,11 @@ import {
   compose,
   combineReducers,
 } from "redux";
-import thunk from "redux-thunk";
+import playlistReducer from "./playlist";
 import sessionReducer from "./session";
 import albumsReducer from "./album";
-import playlistReducer from "./playlist";
 import likesReducer from "./likes";
+import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
