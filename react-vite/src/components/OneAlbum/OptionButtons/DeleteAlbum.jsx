@@ -1,15 +1,10 @@
 import OpenModalMenuItem from "../../Navigation/OpenModalMenuItem";
-import { useNavigate, useParams } from "react-router-dom";
-import { deleteAlbumThunk } from "../../../redux/album";
-import { useDispatch } from "react-redux";
 import DeleteAlbumModal from "../DeleteAlbumModal";
-import '../../SongCard/SongCard.css'
+import { useParams } from "react-router-dom";
+import '../../SongCard/SongCard.css';
 
 export default function DeleteAlbum ()  {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
     const { albumId } = useParams();
-
 
   return (
     <>

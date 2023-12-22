@@ -7,7 +7,7 @@ export default function PlaylistCard({ playlist }) {
     }
     return (
        <div className="playlist-card" onClick={onClick}>
-            <p className="playlist-card-title">{playlist.title}</p>
+            <h4 className="playlist-card-title">{playlist.title}</h4>
             <img className="playlist-card-image" src={playlist.cover_img}/>
             <p className="playlist-card-num-songs">{playlist.num_songs} Songs</p>
         </div>

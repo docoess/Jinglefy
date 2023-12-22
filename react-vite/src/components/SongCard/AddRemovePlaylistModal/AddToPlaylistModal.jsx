@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from "react-redux"
-import {useModal} from "../../../context/Modal"
-import { allPlaylistsThunk, addSongToPlaylistThunk } from "../../../redux/playlist"
-import { useEffect, useState } from "react"
-import './AddToPlaylistModal.css'
+import { allPlaylistsThunk, addSongToPlaylistThunk } from "../../../redux/playlist";
+import { useDispatch, useSelector } from "react-redux";
+import {useModal} from "../../../context/Modal";
+import { useEffect, useState } from "react";
+import './AddToPlaylistModal.css';
 
 
 export default function AddToPlaylistModal({ song}) {

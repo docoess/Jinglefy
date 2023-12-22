@@ -5,14 +5,14 @@ import { useDispatch } from "react-redux";
 import './CreateSongForm.css';
 
 export default function CreateSongForm() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { albumId } = useParams();
   const [title, setTitle] = useState('')
   const [song, setSong] = useState(null)
   const [audioLoading, setAudioLoading] = useState(false)
   const [validationErrors, setValidationErrors] = useState({})
   const [hasSubmitted, setHasSubmitted] = useState(false)
-  const dispatch = useDispatch()
-  const { albumId } = useParams()
-  const navigate = useNavigate()
 
   useEffect(() => {
     const getAlbum = async () => {
@@ -55,7 +55,7 @@ export default function CreateSongForm() {
     // some sort of loading message is a good idea
     setAudioLoading(true);
     let data = await dispatch(postSongThunk(formData, albumId))
-    console.log("UPLOAD COMPLETE",data)
+    // console.log("UPLOAD COMPLETE",data)
     setHasSubmitted(false)
     navigate(`/albums/${albumId}`)
   }

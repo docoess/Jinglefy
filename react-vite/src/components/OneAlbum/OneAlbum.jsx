@@ -6,7 +6,7 @@ import { oneAlbumThunk } from "../../redux/album";
 import { getLikesThunk } from "../../redux/likes";
 import { useEffect, useState } from "react";
 import SongCard from "../SongCard/SongCard";
-import "./OneAlbum.css"
+import "./OneAlbum.css";
 
 const formattedDate = (date) => {
     const d = new Date(date);
@@ -28,12 +28,9 @@ export default function OneAlbum() {
     const currentUser = useSelector((state) => state.session.user)
     const [errors, setErrors] = useState(null)
 
-
-
     let songs;
     if(album != undefined) {
-    // ? ^ trying to key into undefined in ANY way throws an error
-    // best solution I've found is != null/undefined
+    // best solution I've found is x != null/undefined for useSelector variables
         if (album.songs) {
              songs = Object.values(album.songs)
 
@@ -65,7 +62,6 @@ export default function OneAlbum() {
 
         getAlbums()
     }, [dispatch, albumId])
-
 
 
     return album && (

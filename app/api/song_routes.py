@@ -1,6 +1,6 @@
-from flask import Blueprint, request, make_response
-from flask_login import login_required, current_user
 from .aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
+from flask_login import login_required, current_user
+from flask import Blueprint, request, make_response
 from app.models import Album, db, Song
 from ..forms import SongForm
 
@@ -15,6 +15,7 @@ def get_all_songs():
   songs = [song.to_dict() for song in Song.query.all()]
   return songs
 
+
 @song_routes.route('/<int:id>')
 def get_song_by_id(id):
   """
@@ -24,6 +25,7 @@ def get_song_by_id(id):
   song = Song.query.get(id)
 
   return song.to_dict()
+
 
 @song_routes.route('/new', methods=['POST'])
 @login_required
@@ -40,7 +42,7 @@ def create_song():
     song_file = form.data["song_file"]
     song_file.filename = get_unique_filename(song_file.filename)
     upload = upload_file_to_s3(song_file, filetype='audio')
-    print('UPLOAD FROM CREATE SONG ROUTE', upload)
+    # print('UPLOAD FROM CREATE SONG ROUTE', upload)
 
     if "url" not in upload:
       return upload
@@ -108,6 +110,7 @@ def create_song():
 #       print(form.errors)
 #       return form.errors
 
+
 @song_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required
 def delete_song(id):
@@ -133,6 +136,7 @@ def delete_song(id):
 
     return {"message": "Successfully Deleted"}
 
+
 @song_routes.route('/<int:id>/like', methods=['POST'])
 @login_required
 def like_song(id):
@@ -142,19 +146,20 @@ def like_song(id):
 
   song = Song.query.get(id)
 
-  print('BEFORE', song.song_likes)
+  # print('BEFORE', song.song_likes)
 
   if current_user not in song.song_likes:
-    print('IN THE IF BLOCK')
+    # print('IN THE IF BLOCK')
     song.song_likes.append(current_user)
 
     db.session.commit()
 
-  print('AFTER', song.song_likes)
+  # print('AFTER', song.song_likes)
 
   returnDict = [song.id for song in current_user.liked_songs]
   returnDict.append(10000000000)
   return returnDict
+
 
 @song_routes.route('/<int:id>/unlike', methods=['PATCH'])
 @login_required

@@ -1,19 +1,19 @@
 import { postAlbumThunk } from "../../redux/album";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import './NewAlbum.css';
 
 
 export default function NewAlbum() {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [title, setTitle] = useState("")
     const [cover, setCover] = useState('')
     const [desc, setDesc] = useState("")
     const [imageLoading, setImageLoading] = useState(false)
-    const [validationErrors, setValidationErrors] = useState({})
     const [hasSubmitted, setHasSubmitted] = useState(false)
+    const [validationErrors, setValidationErrors] = useState({})
 
     useEffect(() => {
         const errors = {}
@@ -50,7 +50,7 @@ export default function NewAlbum() {
         // some sort of loading message is a good idea
         setImageLoading(true);
         let album = await dispatch(postAlbumThunk(formData))
-        console.log("UPLOAD COMPLETE",album)
+        // console.log("UPLOAD COMPLETE",album)
         setHasSubmitted(false)
         navigate(`/albums/${album.id}`)
     }
