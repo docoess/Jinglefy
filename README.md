@@ -11,5 +11,5 @@
 [Derek Slayton]: https://github.com/Dslayton1998
 [Donald Roessler]: https://github.com/docoess
 [Elliot Starr]: https://github.com/Heecher626
-[here]: https://spotify-clone-ggmc.onrender.com
+[here]: https://jinglefy.onrender.com/albums
 [this github repo's wiki]: https://github.com/docoess/week20-group-project/wiki
