@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import DeleteSongModal from "./DeleteSongModal";
 import { useNavigate } from "react-router-dom";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./SongCard.css";
-
+import { MusicContext } from "../../context/MusicContext";
 // import { FaBeer } from 'react-icons/fa';
 
 // class Question extends React.Component {
@@ -25,6 +25,7 @@ export default function SongCard({ song, source, playlistId, artistId }) {
   const [numLikes, setNumLikes] = useState(song.likes)
   const [deleted, setDeleted] = useState(false)
   const [liked, setLiked] = useState(false)
+  const { setCurrentSong } = useContext(MusicContext)
 
   const addLike = async () => {
     await dispatch(addLikeThunk(song.id))
@@ -63,7 +64,6 @@ export default function SongCard({ song, source, playlistId, artistId }) {
    }
   }
 
-
   const checkSource = () => {
     if (source == 'album') {
       return (
@@ -84,14 +84,19 @@ export default function SongCard({ song, source, playlistId, artistId }) {
     }
   }
 
+  const setSong = () => {
+    setCurrentSong(song.song_link)
+  }
 
-  // console.log("deleted value: ",deleted)
+
   return !deleted &&(
     <div className="song-card">
         <div className="song-card-upper">
+
           <div className="song-card-song-title">
             {source == "album" && song.track_num + ". "}{song.title}:
-            <audio controls src={song.song_link} className="song-card-song">fallback placeholder</audio>
+            {/* <audio controls src={song.song_link} className="song-card-song">fallback placeholder</audio> */}
+            <button onClick={setSong}>Play</button>
           </div>
 
         </div>
