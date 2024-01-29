@@ -1,3 +1,10 @@
+.playlists-sign-in{
+    margin-top: 30vh;
+    text-align: center;
+    font-size: 60px;
+    color: #ff5000;
+}
+
 .all-playlists{
     display: flex;
     flex-direction: column;
