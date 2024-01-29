@@ -26,13 +26,13 @@ export default function AllPlaylists() {
      }
     if(currentUser == null){
         return (
-            <h1>Please sign in to view playlists!</h1>
+            <h1 className="playlists-sign-in">Please sign in to view playlists!</h1>
         )
     }
 
     return (
         <div className="all-playlists">
-            <h4 className="all-playlists-header">Browse all of your Jingle Playlists!</h4>
+            <h4 className="all-playlists-header">{allPlaylists.length ? `Browse all of your Jingle Playlists!` : `You don't have any playlists yet!`}</h4>
             <div className="all-playlists-container">
                 {errors && <p>{errors}</p>}
                 {allPlaylists.map(playlist => (
