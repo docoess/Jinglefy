@@ -26,7 +26,7 @@ function LoginFormModal() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
-      navigate('/')
+      navigate('/albums')
       closeModal();
     }
   };
@@ -43,7 +43,7 @@ function LoginFormModal() {
     if(serverResponse){
       setErrors(serverResponse)
     } else {
-      navigate('/')
+      navigate('/albums')
       closeModal()
     }
   }
