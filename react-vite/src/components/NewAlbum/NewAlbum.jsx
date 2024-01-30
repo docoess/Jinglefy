@@ -50,7 +50,6 @@ export default function NewAlbum() {
         // some sort of loading message is a good idea
         setImageLoading(true);
         let album = await dispatch(postAlbumThunk(formData))
-        // console.log("UPLOAD COMPLETE",album)
         setHasSubmitted(false)
         navigate(`/albums/${album.id}`)
     }

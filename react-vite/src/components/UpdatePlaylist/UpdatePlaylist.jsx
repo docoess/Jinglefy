@@ -51,8 +51,6 @@ export default function UpdatePlaylist() {
         // some sort of loading message is a good idea
         setImageLoading(true);
         await dispatch(updatePlaylistThunk(playlistId,formData))
-
-        // console.log("UPLOAD COMPLETE",data)
         navigate(`/playlists/${playlistId}`)
     }
 

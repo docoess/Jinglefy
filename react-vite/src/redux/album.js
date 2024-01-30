@@ -48,7 +48,6 @@ export const allAlbumsThunk = () => async (dispatch) => {
     if(res.ok) {
         const albums = await res.json();
         if(albums.errors) {
-            // console.log(albums.errors)
             return albums.errors;
         }
         dispatch(getAllAlbums(albums))
@@ -63,14 +62,12 @@ export const oneAlbumThunk = (albumId) => async dispatch => {
         if(res.ok) {
             const album = await res.json()
             if(album.errors) {
-                // console.log(album.errors)
                 return album.errors
             }
             dispatch(getOneAlbum(album))
             return null
         }
     } catch(error) {
-        console.log('catch error', error)
         return error
     }
 }
@@ -85,11 +82,9 @@ export const postAlbumThunk = (formData) => async dispatch => {
     if (res.ok) {
         const album = await res.json();
         dispatch(postAlbum(album))
-        // console.log('post album thunk',album)
         return album
     } else {
         const album = await res.json()
-        console.log('post,thunk',album)
         return album
     }
 
@@ -97,7 +92,6 @@ export const postAlbumThunk = (formData) => async dispatch => {
 
 
 export const updateALbumThunk = (albumId,formData) => async dispatch => {
-    console.log('update thunk ', albumId, formData)
     try {
         const res = await fetch(`/api/albums/${albumId}/update`, {
             method: "PUT",
@@ -107,14 +101,12 @@ export const updateALbumThunk = (albumId,formData) => async dispatch => {
         if (res.ok) {
             const album = await res.json()
             dispatch(updateAlbum(albumId))
-            // console.log('update album in fetch',album)
         }
         else {
             const album = await res.json()
             return album
         }
     } catch(error) {
-        console.log('catch error: ', error)
         return error
     }
 
@@ -132,19 +124,16 @@ export const deleteAlbumThunk = (albumId) => async dispatch => {
             dispatch(deleteAlbum(albumId))
         } else {
             const error = await res.json()
-            console.log(error)
             return null
         }
 
     } catch (error) {
-        console.log('catch error: ',error)
         return error
     }
 }
 
 
 export const deleteSongThunk = (songId) => async dispatch => {
-    console.log(songId)
     try {
       const res = await fetch(`/api/songs/${songId}/delete`, {
         method: 'DELETE'
@@ -152,15 +141,12 @@ export const deleteSongThunk = (songId) => async dispatch => {
 
       if (res.ok) {
         const song = await res.json()
-        // console.log(song)
         dispatch(deleteSong(songId))
       } else {
         const err = await res.json()
-        console.log(err)
         return null
       }
     } catch (error) {
-      console.log('catch error:', error)
       return error
     }
   }
@@ -174,15 +160,12 @@ export const deleteSongThunk = (songId) => async dispatch => {
 
         if (res.ok) {
             const newSong = await res.json()
-            // console.log('NEW SONG', newSong)
             dispatch(postSong(newSong, albumId))
         } else {
             const err = await res.json()
-            console.log(err)
             return null
         }
       } catch (error) {
-        console.log('catch error:', error)
         return error
       }
   }
@@ -211,7 +194,6 @@ function albumsReducer(state = {}, action) {
         }
 
         case DELETE_ALBUM:
-            // console.log('made it to reducer')
             const newStateDelete = {...state}
             delete newStateDelete[action.payload]
             return newStateDelete
@@ -223,14 +205,12 @@ function albumsReducer(state = {}, action) {
 
         case DELETE_SONG: {
             const newState = {...state}
-            // console.log('NEW STATE IN DELETE SONG REDUCER', newState)
             delete newState.songs[action.payload]
             return newState
         }
 
         case POST_SONG: {
             const newState = {...state}
-            // console.log('NEW STATE IN POST SONG', newState)
             newState[action.payload.albumId]['songs'] = {}
             newState[action.payload.albumId]['songs'][action.payload.song.id] = action.payload.song
             return newState

@@ -42,7 +42,6 @@ export default function CreatePlaylistPage() {
         // some sort of loading message is a good idea
         setImageLoading(true);
         let data = await dispatch(postPlaylistThunk(formData))
-        // console.log("UPLOAD COMPLETE", data)
         navigate(`/playlists/${data.id}`)
     }
 

@@ -10,13 +10,7 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useEffect, useState, useContext } from "react";
 import "./SongCard.css";
 import { MusicContext } from "../../context/MusicContext";
-// import { FaBeer } from 'react-icons/fa';
 
-// class Question extends React.Component {
-//   render() {
-//     return <h3> Lets go for a <FaBeer />? </h3>
-//   }
-// }
 
 export default function SongCard({ song, source, playlistId, artistId }) {
   const dispatch = useDispatch();

@@ -12,7 +12,6 @@ export const getLikesThunk = () => async (dispatch) => {
     dispatch(getLikes(likes))
   } else {
     const error = await res.json();
-    console.log(error)
     return error
   }
 }
@@ -26,7 +25,6 @@ export const addLikeThunk = (songId) => async (dispatch) => {
     dispatch(getLikes(likes))
   } else {
     const error = await res.json();
-    console.log(error)
     return error
   }
 }
@@ -40,7 +38,6 @@ export const removeLikeThunk = (songId) => async (dispatch) => {
     dispatch(getLikes(likes))
   } else {
     const error = await res.json();
-    console.log(error)
     return error
   }
 }
