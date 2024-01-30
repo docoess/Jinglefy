@@ -99,7 +99,7 @@ export default function NewAlbum() {
                     Upload a cover image for your album!
                     <input
                     type="file"
-                    accept="image/*"
+                    accept="image/png, image/jpg, image/jpeg"
                     onChange={(e) => setCover(e.target.files[0])}
                     />
                 </label>

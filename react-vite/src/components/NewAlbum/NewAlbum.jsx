@@ -95,7 +95,7 @@ export default function NewAlbum() {
                    <span>Upload a cover image for your album!</span>
                     <input
                     type="file"
-                    accept="image/*"
+                    accept="image/png, image/jpg, image/jpeg"
                     onChange={(e) => setCover(e.target.files[0])}
                     />
                     {hasSubmitted && validationErrors.cover && (
