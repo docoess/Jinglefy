@@ -213,7 +213,7 @@ function albumsReducer(state = {}, action) {
         case DELETE_ALBUM:
             // console.log('made it to reducer')
             const newStateDelete = {...state}
-            delete newStateDelete[action.payload.id]
+            delete newStateDelete[action.payload]
             return newStateDelete
 
         case UPDATE_ALBUM: {
