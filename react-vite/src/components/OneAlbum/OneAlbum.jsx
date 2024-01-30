@@ -32,8 +32,10 @@ export default function OneAlbum() {
     if(album != undefined) {
     // best solution I've found is x != null/undefined for useSelector variables
         if (album.songs) {
-             songs = Object.values(album.songs)
-
+            songs = Object.values(album.songs)
+            songs.sort((a, b) => {
+                return a.track_num - b.track_num
+            });
         }
     }
 
@@ -71,7 +73,7 @@ export default function OneAlbum() {
                 <div className="album-details-text">
                     <h1 className="album-details-title">{album.title}</h1>
                     <p>Made by: {album.artist ? album.artist.username : null}</p>
-                    <p>{album.num_songs} songs · {formattedDate(album.release_date)}</p> 
+                    <p>{album.num_songs} songs · {formattedDate(album.release_date)}</p>
                     <p className="album-details-desc">{album.desc}</p>
                     {ownerOptions()}
                 </div>
