@@ -26,6 +26,7 @@
     font-size: 18px;
     margin: 10px;
     padding: 1%;
+    width: 305px;
 }
 
 .album-card:hover{
@@ -38,6 +39,12 @@
     border-radius: 10px;
     height: 300px;
     width: 300px;
+}
+
+.album-card-title{
+    text-wrap: balance;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .all-albums-new-album-button{

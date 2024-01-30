@@ -72,6 +72,7 @@ export default function UpdatePlaylist() {
                     placeholder="Playlist Title"
                     onChange={(e) => setTitle(e.target.value)}
                     required
+                    maxLength={50}
                     />
                         {hasSubmitted && validationErrors.title && (
                         <span className="error">{validationErrors.title}</span>
