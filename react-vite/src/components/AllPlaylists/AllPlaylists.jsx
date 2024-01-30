@@ -11,7 +11,6 @@ export default function AllPlaylists() {
     const [errors, setErrors] = useState(null)
     const allPlaylists = useSelector(state => Object.values(state.playlists))
     const currentUser = useSelector(state => state.session.user)
-    // console.log("allPlaylist: ",allPlaylists)
 
     useEffect(() => {
         const getPlaylists = async () => {

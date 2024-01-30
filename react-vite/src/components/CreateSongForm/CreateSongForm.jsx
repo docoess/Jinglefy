@@ -55,7 +55,6 @@ export default function CreateSongForm() {
     // some sort of loading message is a good idea
     setAudioLoading(true);
     let data = await dispatch(postSongThunk(formData, albumId))
-    // console.log("UPLOAD COMPLETE",data)
     setHasSubmitted(false)
     navigate(`/albums/${albumId}`)
   }

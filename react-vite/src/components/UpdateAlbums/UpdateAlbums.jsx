@@ -52,7 +52,6 @@ export default function NewAlbum() {
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);
-        // console.log('COVER', cover)
         await dispatch(updateALbumThunk(albumId,formData))
         setHasSubmitted(false)
         navigate(`/albums/${albumId}`)

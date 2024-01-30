@@ -28,7 +28,6 @@ export const allPlaylistsThunk = () => async (dispatch) => {
         dispatch(getAllPlaylists(playlists))
     } else {
         const error = await res.json();
-        console.log(error)
         return error
     }
 }
@@ -41,7 +40,6 @@ export const onePlaylistThunk = (playlistId) => async (dispatch) => {
         dispatch(getOnePlaylist(playlist))
     } else {
         const error = await res.json()
-        console.log(error)
         return error
     }
 }
@@ -59,7 +57,6 @@ export const postPlaylistThunk = (formData) => async (dispatch) => {
         return data;
     } else {
         const error = await res.json();
-        console.log(error)
         return error
     }
 }
@@ -76,7 +73,6 @@ export const updatePlaylistThunk = (playlistId, formData) => async (dispatch) =>
         dispatch(getOnePlaylist(data))
     } else {
         const error = await res.json()
-        console.log(error)
         return error
     }
 }
@@ -91,7 +87,6 @@ export const deletePlaylistThunk = (playlistId) => async (dispatch) => {
         dispatch(removeOnePlaylist(playlistId))
     } else {
         const error = await res.json()
-        console.log(error)
         return error
     }
 }
@@ -109,7 +104,6 @@ export const addSongToPlaylistThunk = (playlistId, songId) => async dispatch => 
             dispatch(getOnePlaylist(data))
         } else {
             const error = await res.json()
-            console.log(error)
             return error
         }
 
@@ -128,7 +122,6 @@ export const deleteSongFromPlaylistThunk = (playlistId, songId) => async (dispat
         dispatch(getOnePlaylist(data))
     } else {
         const error = await res.json()
-        console.log(error)
         return error
     }
 }

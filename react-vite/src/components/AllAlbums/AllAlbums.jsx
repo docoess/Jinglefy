@@ -10,7 +10,6 @@ export default function AllAlbums() {
     const [errors, setErrors] = useState(null)
     const allAlbums = useSelector(state => Object.values(state.albums))
     const currentUser = useSelector((state) => state.session.user)
-    // console.log("allAlbums: ", allAlbums)
 
     useEffect(() => {
         const getAlbums = async () => {
