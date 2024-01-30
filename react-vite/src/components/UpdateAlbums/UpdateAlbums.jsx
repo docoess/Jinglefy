@@ -74,6 +74,7 @@ export default function NewAlbum() {
                     placeholder="Album Title"
                     onChange={(e) => setTitle(e.target.value)}
                     required
+                    maxLength={50}
                     />
                     {hasSubmitted && validationErrors.title && (
                         <span className="error">{validationErrors.title}</span>
@@ -88,6 +89,7 @@ export default function NewAlbum() {
                     placeholder="Album Description"
                     onChange={(e) => setDesc(e.target.value)}
                     required
+                    maxLength={500}
                     />
                     {hasSubmitted && validationErrors.desc && (
                         <span className="error">{validationErrors.desc}</span>

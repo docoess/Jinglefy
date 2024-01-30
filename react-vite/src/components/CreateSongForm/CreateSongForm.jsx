@@ -77,6 +77,7 @@ export default function CreateSongForm() {
           placeholder="Song Title"
           onChange={(e) => setTitle(e.target.value)}
           required
+          maxLength={30}
           />
           {hasSubmitted && validationErrors.title && (
               <span className="error-message">{validationErrors.title}</span>
