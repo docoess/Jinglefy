@@ -32,6 +32,14 @@
   margin-top: 10px;
 }
 
+h2 > a {
+  color: #74A2FF;
+
+  &:visited {
+    color: #74A2FF;
+  }
+}
+
 
 .landing-button {
   border: 1px solid black;
@@ -42,7 +50,7 @@
   text-decoration: none;
   box-sizing: border-box;
   min-width: 260px;
-  
+
   &:hover{
     cursor: pointer;
   }
