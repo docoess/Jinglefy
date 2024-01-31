@@ -14,7 +14,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-
+    width: 90vw;
 }
 
 .album-card{
@@ -26,6 +26,8 @@
     font-size: 18px;
     margin: 10px;
     padding: 1%;
+    width: 305px;
+    transition: box-shadow .3s ease-in-out;
 }
 
 .album-card:hover{
@@ -40,11 +42,17 @@
     width: 300px;
 }
 
+.album-card-title{
+    text-wrap: balance;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
 .all-albums-new-album-button{
     box-shadow: 1px 1px 2px  #ff5000;
     background-color: #74A2FF ;
     color: white;
-    margin: 10px;
+    margin: 10px 10px 20px 10px;
     height: 40px;
     width: 20%;
 

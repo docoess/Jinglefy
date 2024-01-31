@@ -52,7 +52,6 @@ export default function NewAlbum() {
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
         setImageLoading(true);
-        // console.log('COVER', cover)
         await dispatch(updateALbumThunk(albumId,formData))
         setHasSubmitted(false)
         navigate(`/albums/${albumId}`)
@@ -74,10 +73,9 @@ export default function NewAlbum() {
                     placeholder="Album Title"
                     onChange={(e) => setTitle(e.target.value)}
                     required
+                    maxLength={50}
                     />
-                    {hasSubmitted && validationErrors.title && (
-                        <span className="error">{validationErrors.title}</span>
-                    )}
+                    <span className="error">{hasSubmitted && validationErrors.title}</span>
                 </label>
                 <label className="new-album-input">
                     Give a brief description of your Album
@@ -88,16 +86,15 @@ export default function NewAlbum() {
                     placeholder="Album Description"
                     onChange={(e) => setDesc(e.target.value)}
                     required
+                    maxLength={500}
                     />
-                    {hasSubmitted && validationErrors.desc && (
-                        <span className="error">{validationErrors.desc}</span>
-                    )}
+                    <span className="error">{hasSubmitted && validationErrors.desc}</span>
                 </label>
                 <label className="new-album-input">
                     Upload a cover image for your album!
                     <input
                     type="file"
-                    accept="image/*"
+                    accept="image/png, image/jpg, image/jpeg"
                     onChange={(e) => setCover(e.target.files[0])}
                     />
                 </label>

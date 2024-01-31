@@ -21,10 +21,18 @@
     margin: 10px 0;
     background-color: #58019C;
     border: 2px solid black;
-    padding: 32px;
+    padding: 32px 32px 8px 32px;
     border-radius: 20px;
-    width: 100%;
+    width: 450px;
     align-items: center;
+}
+
+.new-album-input > span {
+    margin-bottom: 4px;
+}
+
+.new-album-input > input, .new-album-input > textarea {
+    padding: 4px;
 }
 
 .new-album-input > input::placeholder {
@@ -66,6 +74,7 @@
 .new-album-submit-button {
     width: 300px;
     height: 40px;
+    margin-bottom: 20px;
     background-color: #74A2FF ;
     color: white;
 

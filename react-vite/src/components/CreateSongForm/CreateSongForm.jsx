@@ -55,7 +55,6 @@ export default function CreateSongForm() {
     // some sort of loading message is a good idea
     setAudioLoading(true);
     let data = await dispatch(postSongThunk(formData, albumId))
-    // console.log("UPLOAD COMPLETE",data)
     setHasSubmitted(false)
     navigate(`/albums/${albumId}`)
   }
@@ -69,7 +68,7 @@ export default function CreateSongForm() {
       encType="multipart/form-data"
       >
         <label className="new-song-input">
-          <h3 className="h4-text">What is the song title?</h3>
+          <span>What is the song title?</span>
           <input
           className="inner-input"
           type="text"
@@ -77,22 +76,19 @@ export default function CreateSongForm() {
           placeholder="Song Title"
           onChange={(e) => setTitle(e.target.value)}
           required
+          maxLength={30}
           />
-          {hasSubmitted && validationErrors.title && (
-              <span className="error-message">{validationErrors.title}</span>
-          )}
+          <span className="error">{hasSubmitted && validationErrors.title}</span>
         </label>
         <label className="new-song-input">
-          <h3 className="h4-text">Upload your song file!</h3>
+        <span>Upload your song file!</span>
           <input
           className="inner-input"
           type="file"
           accept=".wav,.ogg,.mp3"
           onChange={(e) => setSong(e.target.files[0])}
           />
-          {hasSubmitted && validationErrors.song && (
-              <span className="error-message">{validationErrors.song}</span>
-          )}
+              <span className="error">{hasSubmitted &&validationErrors.song}</span>
         </label>
         <button className="new-song-submit-button">Submit</button>
       </form>

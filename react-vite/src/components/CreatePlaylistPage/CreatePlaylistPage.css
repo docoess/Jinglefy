@@ -21,14 +21,22 @@
     margin: 10px 0;
     background-color: #58019C;
     border: 2px solid black;
-    padding: 32px;
+    padding: 32px 32px 4px 32px;
     border-radius: 20px;
-    width: 100%;
+    width: 450px;
     align-items: center;
 }
 
 .new-playlist-input > input::placeholder {
     color:black
+}
+
+.new-playlist-input > span {
+    margin-bottom: 4px;
+}
+
+.new-playlist-input > input {
+    padding: 4px;
 }
 
 .new-playlist-input > input[type="file"] {

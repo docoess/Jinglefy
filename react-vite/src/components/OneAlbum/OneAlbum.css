@@ -27,4 +27,7 @@
 
 .album-details-desc {
     text-align: justify;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
 }

@@ -50,7 +50,6 @@ export default function NewAlbum() {
         // some sort of loading message is a good idea
         setImageLoading(true);
         let album = await dispatch(postAlbumThunk(formData))
-        // console.log("UPLOAD COMPLETE",album)
         setHasSubmitted(false)
         navigate(`/albums/${album.id}`)
     }
@@ -70,10 +69,9 @@ export default function NewAlbum() {
                     placeholder="Album Title"
                     onChange={(e) => setTitle(e.target.value)}
                     required
+                    maxLength={50}
                     />
-                    {hasSubmitted && validationErrors.title && (
-                        <span className="error">{validationErrors.title}</span>
-                    )}
+                    <span className="error">{hasSubmitted && validationErrors.title}</span>
                 </label>
                 <label className="new-album-input">
                    <span>Give a description of your Album!</span>
@@ -84,21 +82,18 @@ export default function NewAlbum() {
                     placeholder="Album Description"
                     onChange={(e) => setDesc(e.target.value)}
                     required
+                    maxLength={500}
                     />
-                    {hasSubmitted && validationErrors.desc && (
-                        <span className="error">{validationErrors.desc}</span>
-                    )}
+                    <span className="error">{hasSubmitted && validationErrors.desc}</span>
                 </label>
                 <label className="new-album-input">
                    <span>Upload a cover image for your album!</span>
                     <input
                     type="file"
-                    accept="image/*"
+                    accept="image/png, image/jpg, image/jpeg"
                     onChange={(e) => setCover(e.target.files[0])}
                     />
-                    {hasSubmitted && validationErrors.cover && (
-                        <span className="error">{validationErrors.cover}</span>
-                    )}
+                    <span className="error">{hasSubmitted && validationErrors.cover}</span>
                 </label>
                 <button className="new-album-submit-button" type="submit">Submit</button>
                 {(imageLoading)&& <p>Loading...</p>}

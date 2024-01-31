@@ -51,8 +51,6 @@ export default function UpdatePlaylist() {
         // some sort of loading message is a good idea
         setImageLoading(true);
         await dispatch(updatePlaylistThunk(playlistId,formData))
-
-        // console.log("UPLOAD COMPLETE",data)
         navigate(`/playlists/${playlistId}`)
     }
 
@@ -65,28 +63,25 @@ export default function UpdatePlaylist() {
             onSubmit={handleSubmit}
             encType="multipart/form-data">
                 <label className="new-playlist-input">
-                    What is the title for your playlist?
+                    <span>What is the title for your playlist?</span>
                     <input
                     type="text"
                     value={title}
                     placeholder="Playlist Title"
                     onChange={(e) => setTitle(e.target.value)}
                     required
+                    maxLength={50}
                     />
-                        {hasSubmitted && validationErrors.title && (
-                        <span className="error">{validationErrors.title}</span>
-                    )}
+                    <span className="error">{hasSubmitted && validationErrors.title}</span>
                 </label>
                 <label className="new-playlist-input">
-                    Upload a cover image for your playlist!
+                <span>Upload a cover image for your playlist!</span>
                     <input
                     type="file"
                     accept="image/*"
                     onChange={(e) => setCover(e.target.files[0])}
                     />
-                       {hasSubmitted && validationErrors.cover && (
-                        <span className="error">{validationErrors.cover}</span>
-                    )}
+                    <span className="error">{hasSubmitted && validationErrors.cover}</span>
                 </label>
                 <button type="submit" className="new-playlist-submit-button">Submit</button>
                 {(imageLoading)&& <p>Loading...</p>}

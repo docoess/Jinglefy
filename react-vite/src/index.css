@@ -5,11 +5,43 @@
 body{
     background-color: #36454F;
     margin: 0px;
-
+    position: relative;
+    min-height: 90vh;
+    overflow-y: scroll;
+    height: auto;
+    padding-bottom: 10vh;
 }
 
 .error {
     color: #ff5000;
     margin-top: 8px;
     font-weight: bold;
+    min-height: 20px;
+}
+
+.rhap_container{
+    background-color: #58019C;
+    background-image: none;
+    padding-right: 3vw;
+}
+
+.rhap_download-progress {
+    background-color: rgba(58, 81, 128);
+}
+
+.rhap_current-time, .rhap_total-time, .iconify{
+    color: #74A2FF;
+}
+
+.rhap_volume-bar, .rhap_progress-bar,
+.rhap_progress-filled, .rhap_volume-filled,
+.rhap_progress-indicator, .rhap_volume-indicator {
+    background-color: #74A2FF;
+}
+
+.MusicPlayerContainer{
+   position: fixed;
+   bottom: 0px;
+   width: 100vw;
+   background-color: #58019C;
 }

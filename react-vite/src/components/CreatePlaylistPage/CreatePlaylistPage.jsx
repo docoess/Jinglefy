@@ -42,7 +42,6 @@ export default function CreatePlaylistPage() {
         // some sort of loading message is a good idea
         setImageLoading(true);
         let data = await dispatch(postPlaylistThunk(formData))
-        // console.log("UPLOAD COMPLETE", data)
         navigate(`/playlists/${data.id}`)
     }
 
@@ -61,10 +60,9 @@ export default function CreatePlaylistPage() {
                     placeholder="Playlist Title"
                     onChange={(e) => setTitle(e.target.value)}
                     required
+                    maxLength={50}
                     />
-                     {hasSubmitted && validationErrors.title && (
-                        <span className="error">{validationErrors.title}</span>
-                    )}
+                    <span className="error">{hasSubmitted && validationErrors.title}</span>
                 </label>
                 <label className="new-playlist-input">
                    <span>Upload a cover image for your playlist!</span>
@@ -73,9 +71,7 @@ export default function CreatePlaylistPage() {
                     accept="image/*"
                     onChange={(e) => setCover(e.target.files[0])}
                     />
-                      {hasSubmitted && validationErrors.cover && (
-                        <span className="error">{validationErrors.cover}</span>
-                    )}
+                    <span className="error">{hasSubmitted && validationErrors.cover}</span>
                 </label>
 
                 <button className="new-playlist-submit-button" type="submit">Submit</button>

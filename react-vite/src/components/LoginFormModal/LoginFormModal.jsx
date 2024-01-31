@@ -26,7 +26,7 @@ function LoginFormModal() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
-      navigate('/')
+      navigate('/albums')
       closeModal();
     }
   };
@@ -43,7 +43,7 @@ function LoginFormModal() {
     if(serverResponse){
       setErrors(serverResponse)
     } else {
-      navigate('/')
+      navigate('/albums')
       closeModal()
     }
   }
@@ -61,7 +61,7 @@ function LoginFormModal() {
             onChange={(e) => setEmail(e.target.value)}
             // required
           />
-            {errors.email && <p className="error">{errors.email}</p>}
+            <p className="error">{errors.email}</p>
         </label>
         <label className="login-modal-input">
           Password
@@ -72,7 +72,7 @@ function LoginFormModal() {
             onChange={(e) => setPassword(e.target.value)}
             // required
           />
-            {errors.password && <p className="error">{errors.password}</p>}
+            <p className="error">{errors.password}</p>
         </label>
         <button className="login-modal-submit-button" type="submit">Log In</button>
         <button className="login-modal-submit-button" onClick={demoLogin}>Demo User</button>
