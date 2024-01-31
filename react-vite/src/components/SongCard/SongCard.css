@@ -1,6 +1,5 @@
 .song-card {
     display: flex;
-    flex-direction: column;
     background-color: #58019C;
     border: 2px solid black;
     box-sizing: border-box;
@@ -9,44 +8,54 @@
     color: #74A2FF;
     padding: 0 10%;
     width: 60%;
-}
-
-.song-card-upper{
-    display: flex;
+    height: 100px;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
 }
 
-.song-card-song-title{
+.song-play-button{
+    height: 30px;
+    width: 30px;
+    margin: 10px;
+
+    transition: color .1s ease-in;
+
+    &:hover {
+        cursor: pointer;
+        color: #4371CE
+    }
+}
+
+.song-card-song-title-play{
     display: flex;
     align-items: center;
-}
-
-
-.song-card-song{
-    margin: 0 5px;
-    width: 30rem;
-    &::-webkit-media-controls-panel {
-        background-color: #56AEFF;
-    }
-
 }
 
 .song-card-buttons-likes-container{
     display: flex;
-    justify-content: space-between;
     margin-top: 15px;
-    width: 100%;
 }
 
 .like-button{
     font-size: x-large;
-    padding-left: 5px;
+    padding-right: 3px;
+    transition: color .1s ease-in;
+
+    &:hover {
+        cursor: pointer;
+        color: #4371CE
+    }
 }
 
 .like-count {
     justify-self: flex-start;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+.num-likes {
+    width: 60px;
 }
 
 .song-card-buttons-container{
@@ -60,8 +69,10 @@
     padding: 5px;
     margin: 2px;
     text-decoration: none;
+    transition: box-shadow .2s ease-in-out;
 
     &:hover{
         cursor: pointer;
+        box-shadow: 2px 2px 6px #A33;
     }
 }

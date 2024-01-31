@@ -11,7 +11,6 @@ export default function MusicPlayer() {
             <AudioPlayer
             autoPlay
             src={currentSong}
-            onPlay={e => console.log("onPlay")}
             // other props here
             volume={0.3}
             showJumpControls={false}
