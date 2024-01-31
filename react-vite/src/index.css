@@ -21,6 +21,7 @@ body{
 .rhap_container{
     background-color: #58019C;
     background-image: none;
+    padding-right: 3vw;
 }
 
 .rhap_download-progress {
