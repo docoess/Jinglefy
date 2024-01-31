@@ -1,6 +1,14 @@
 .profile-dropdown-button {
  position: relative;
  display: inline-block;
+ padding: 5px 20px 5px 20px;
+ background-color: #74A2FF;
+ border-radius: 5px;
+}
+
+.profile-dropdown-button:hover{
+  cursor: pointer;
+  box-shadow: 1px 1px 3px 3px  #ff5000;
 }
 
 .profile-dropdown {
