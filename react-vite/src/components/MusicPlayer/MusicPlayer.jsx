@@ -13,6 +13,7 @@ export default function MusicPlayer() {
             src={currentSong}
             onPlay={e => console.log("onPlay")}
             // other props here
+            volume={0.3}
             showJumpControls={false}
             />
         </div>
