@@ -24,15 +24,19 @@
     margin: 10px 0;
     background-color: #58019C;
     border: 2px solid black;
-    padding: 32px;
+    padding: 32px 32px 0px 32px;
     border-radius: 20px;
-    width: 80%;
+    width: 450px;
     align-items: center;
 }
 
 
 .sign-up-input > input::placeholder {
     color:black
+}
+
+.sign-up-input > input {
+    padding: 4px;
 }
 
 .sign-up-submit-button {

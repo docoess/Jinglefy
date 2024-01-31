@@ -19,8 +19,12 @@
     border: 2px solid black;
     padding: 32px;
     border-radius: 20px;
-    width: 100%;
+    width: 450px;
     align-items: center;
+}
+
+.new-song-input > span {
+    margin-bottom: 4px;
 }
 
 .new-song-input > input[type="file"] {
@@ -29,8 +33,8 @@
     position: relative;
     outline: none;
     content: "Upload File";
-    
-    
+
+
     /* File Selector Button Styles */
     &::file-selector-button {
       border-radius: 4px;

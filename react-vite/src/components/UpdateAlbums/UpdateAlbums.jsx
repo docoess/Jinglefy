@@ -75,9 +75,7 @@ export default function NewAlbum() {
                     required
                     maxLength={50}
                     />
-                    {hasSubmitted && validationErrors.title && (
-                        <span className="error">{validationErrors.title}</span>
-                    )}
+                    <span className="error">{hasSubmitted && validationErrors.title}</span>
                 </label>
                 <label className="new-album-input">
                     Give a brief description of your Album
@@ -90,9 +88,7 @@ export default function NewAlbum() {
                     required
                     maxLength={500}
                     />
-                    {hasSubmitted && validationErrors.desc && (
-                        <span className="error">{validationErrors.desc}</span>
-                    )}
+                    <span className="error">{hasSubmitted && validationErrors.desc}</span>
                 </label>
                 <label className="new-album-input">
                     Upload a cover image for your album!

@@ -16,6 +16,7 @@ body{
     color: #ff5000;
     margin-top: 8px;
     font-weight: bold;
+    min-height: 20px;
 }
 
 .rhap_container{
